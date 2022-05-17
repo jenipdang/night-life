@@ -4,36 +4,36 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
 
-function RecipeList() {
-  const [recipes, setRecipes] = useState([]);
+function EventList() {
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    fetch("/api/recipes")
+    fetch("/api/events")
       .then((r) => r.json())
-      .then(setRecipes);
+      .then(setEvents);
   }, []);
 
   return (
     <Wrapper>
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => (
-          <Recipe key={recipe.id}>
+      {events.length > 0 ? (
+        events.map((event) => (
+          <Event key={event.id}>
             <Box>
-              <h2>{recipe.title}</h2>
+              <h2>{event.title}</h2>
               <p>
-                <em>Time to Complete: {recipe.minutes_to_complete} minutes</em>
+                <em>Time to Complete: {event.minutes_to_complete} minutes</em>
                 &nbsp;·&nbsp;
-                <cite>By {recipe.user.username}</cite>
+                <cite>By {event.user.username}</cite>
               </p>
-              <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
+              <ReactMarkdown>{event.instructions}</ReactMarkdown>
             </Box>
-          </Recipe>
+          </Event>
         ))
       ) : (
         <>
-          <h2>No Recipes Found</h2>
+          <h2>No Event Found</h2>
           <Button as={Link} to="/new">
-            Make a New Recipe
+            Create a new event
           </Button>
         </>
       )}
@@ -46,8 +46,8 @@ const Wrapper = styled.section`
   margin: 40px auto;
 `;
 
-const Recipe = styled.article`
+const Event = styled.article`
   margin-bottom: 24px;
 `;
 
-export default RecipeList;
+export default EventList;

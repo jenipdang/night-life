@@ -1,11 +1,13 @@
-class Api::RecipesController < ApplicationController
+class Api::EventController < ApplicationController
+
+  skip_before_action: :authorize, only: [:index]
   
   def index
-    render json: Recipe.all
+    render json: Event.all
   end
 
   def create
-    recipe = @current_user.recipes.create!(recipe_params)
+    recipe = @current_user.events.create!(recipe_params)
     render json: recipe, status: :created
   end
 
