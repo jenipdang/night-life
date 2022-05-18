@@ -7,14 +7,14 @@ class Api::EventController < ApplicationController
   end
 
   def create
-    recipe = @current_user.events.create!(recipe_params)
-    render json: recipe, status: :created
+    event = @current_user.events.create!(event_params)
+    render json: event, status: :created
   end
 
   private
 
-  def recipe_params
-    params.permit(:title, :instructions, :minutes_to_complete)
+  def event_params
+    params.permit(:name, :image_url, :date, :start_time, :venue)
   end
 
 end

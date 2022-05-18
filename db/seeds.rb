@@ -12,7 +12,7 @@ v4 = Venue.create!(name: "ACE Beer Club", address: "9622 Garden Grove Blvd. Ste 
 v5 = Venue.create!(name: "Bay Grill & Karaoke", address: "11951 Beach Blvd Ste J", city: "Stanton", state: "CA", zip_code: "90680")
 
 puts "📃 Seeding events..."
-Event.create!(name:)
+Event.create!(name: "Kim Lee", image_url: "https://timenightclub.com/wp-content/uploads/2022/04/05-20-22_KIM_LEE_2_2160x1080_Eventbrite-1920x960.jpg", date: "Friday, May 20, 2022", start_time: "21:30", venue_id: v1.id, user_id: jeni.id)
 
 
 puts "✅ Done seeding"

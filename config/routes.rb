@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :venues
   namespace :api do
     resources :events, only: [:index, :create]
     post "/signup", to: "users#create"
