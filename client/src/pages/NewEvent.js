@@ -8,7 +8,6 @@ function NewEvent({ user }) {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const [venue, setVenue] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,15 +67,6 @@ function NewEvent({ user }) {
               id="startTime"
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
-            />
-          </FormField>
-          <FormField>
-            <Label htmlFor="startEnd">End Time</Label>
-            <Input
-              type="time"
-              id="endTime"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
             />
           </FormField>
           <FormField>
