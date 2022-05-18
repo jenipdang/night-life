@@ -1,15 +1,15 @@
-class Api::EventController < ApplicationController
+class Api::EventsController < ApplicationController
 
-  skip_before_action: :authorize, only: [:index]
-  before_action :find_event, only: [:show, :update, :destroy]
+skip_before_action :authorize, only: [:index, :show]
+before_action :find_event, only: [:show, :update, :destroy]
   
   def index
     render json: Event.all
   end
 
-  # def show
-  
-  # end
+  def show
+    render json: @event
+  end
 
   def create
     @event = current_user.events.create!(event_params)
@@ -42,12 +42,12 @@ class Api::EventController < ApplicationController
 
   private
 
-  def find_event
-    @event = Event.find(params[:id])
-  end
+    def find_event
+      @event = Event.find(params[:id])
+    end
 
-  def event_params
-    params.permit(:name, :image_url, :date, :start_time, :venue)
-  end
+    def event_params
+      params.permit(:name, :image_url, :date, :start_time, :venue)
+    end
 
 end

@@ -23,7 +23,7 @@ function EventList() {
               <p>
                 <em>Start Time: {event.start_time} minutes</em>
                 &nbsp;·&nbsp;
-                <cite>By {event.user.username}</cite>
+                {/* <cite>By {event.user.username}</cite> */}
               </p>
               <ReactMarkdown>{event.venue}</ReactMarkdown>
             </Box>
