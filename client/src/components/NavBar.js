@@ -19,7 +19,7 @@ function NavBar({ user, setUser }) {
       </Logo>
       <Nav>
         <Button as={Link} to="/new">
-          New Recipe
+          New Event
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
