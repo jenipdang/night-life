@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :venues
+  # get "/comments", to: "comments#index"
+  
   namespace :api do
-    resources :events, only: [:index, :create]
+    resources :users, only: [:update, :destroy]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
+    
+    resources :comments, only: [:index]
+  
+    resources :venues, only: [:index]
+  
+    resources :events do 
+      resources :comments, shallow: true
+    end
+    
   end
   # all other routes will be load our React application
   # this route definition matches:
