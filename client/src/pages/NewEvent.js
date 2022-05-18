@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
-import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
+import { Button, Error, FormField, Input, Label} from "../styles";
 
 function NewEvent({ user }) {
   const [name, setName] = useState("");
@@ -23,9 +23,10 @@ function NewEvent({ user }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title,
-        instructions,
-        minutes_to_complete: minutesToComplete,
+        name,
+        date,
+        startTime,
+        venue
       }),
     }).then((r) => {
       setIsLoading(false);
@@ -100,11 +101,11 @@ function NewEvent({ user }) {
         </form>
       </WrapperChild>
       <WrapperChild>
-        <h1>{title}</h1>
+        <h1>{name}</h1>
         <p>
           <cite>By {user.username}</cite>
         </p>
-        <ReactMarkdown>{instructions}</ReactMarkdown>
+        <ReactMarkdown>{venue}</ReactMarkdown>
       </WrapperChild>
     </Wrapper>
   );

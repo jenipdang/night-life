@@ -1,9 +1,9 @@
 puts "📃 Seeding users..."
 
-jeni = User.create!(username: "jenidang", email: "jenidang@gmail.com", password_digest: "1234567jd")
-francis = User.create!(username: "francisdang", email: "francisdang@gmail.com", password_digest: "1234567fd")
-racheal = User.create!(username: "racheal", email: "racheal2022@gmail.com", password_digest: "1234567ra")
-matteo = User.create!(username: "racheal", email: "matteo111@gmail.com", password_digest: "1234567ma")
+jeni = User.create!(username: "jenidang", email: "jenidang@gmail.com", password: "1234567jd")
+francis = User.create!(username: "francisdang", email: "francisdang@gmail.com", password: "1234567fd")
+racheal = User.create!(username: "racheal", email: "racheal2022@gmail.com", password: "1234567ra")
+matteo = User.create!(username: "racheal", email: "matteo111@gmail.com", password: "1234567ma")
 
 
 puts "📃 Seeding venues..."

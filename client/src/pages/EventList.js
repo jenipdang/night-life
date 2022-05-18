@@ -19,13 +19,13 @@ function EventList() {
         events.map((event) => (
           <Event key={event.id}>
             <Box>
-              <h2>{event.title}</h2>
+              <h2>{event.name}</h2>
               <p>
-                <em>Time to Complete: {event.minutes_to_complete} minutes</em>
+                <em>Start Time: {event.start_time} minutes</em>
                 &nbsp;·&nbsp;
                 <cite>By {event.user.username}</cite>
               </p>
-              <ReactMarkdown>{event.instructions}</ReactMarkdown>
+              <ReactMarkdown>{event.venue}</ReactMarkdown>
             </Box>
           </Event>
         ))
