@@ -14,7 +14,7 @@ function NavBar({ user, setUser }) {
 	return (	
 		<Wrapper>
 	    <Logo>
-	      <Link to="/">Night Life</Link>
+	      <Link to="/events">Night Life</Link>
 	    </Logo>
 	    <Nav>
 		<Welcome>

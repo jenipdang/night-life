@@ -6,6 +6,7 @@ import './event.css';
 // import EditEvent from './EditEvent';
 import NewComment from '../comments/NewComment';
 import CommentsList from '../comments/CommentsList';
+import dateformat from 'dateformat'
 
 const EventCard = ({ event }) => {
 	const [eventObj, setEventObj] = useState(null);
@@ -63,9 +64,9 @@ const EventCard = ({ event }) => {
 							alt={finalEvent.name}
 						/>
 						<ListGroup className='list-group-flush'>
-							<ListGroupItem>Date: {finalEvent.date}</ListGroupItem>
+							<ListGroupItem>Date: {finalEvent.date ? dateformat(finalEvent.date, 'dddd, mmmm dS yyyy') : ""}</ListGroupItem>
 							<ListGroupItem>
-								Start Time: {finalEvent.start_time}{' '}
+								Start Time: {finalEvent.start_time ? dateformat(finalEvent.start_time, 'h:MM TT Z') : ""}{' '}
 							</ListGroupItem>
 							<ListGroupItem>Venue: {finalEvent.venue.name} </ListGroupItem>
 							{location.pathname !== '/events' ? (

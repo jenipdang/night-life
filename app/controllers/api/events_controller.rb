@@ -4,17 +4,19 @@ skip_before_action :authorize, only: [:index, :show]
 before_action :find_event, only: [:show, :update, :destroy]
   
   def index
-    render json: Event.all
+    render json: Event.preload(:venue).all
   end
 
   def show
     render json: @event
   end
 
+
   def create
     @event = current_user.events.create!(event_params)
     render json: @event, status: :created
   end
+
 
   #patch "/events/:id"
   def update
