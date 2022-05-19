@@ -1,33 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { Button } from "../styles";
 
-function NavBar({ user, setUser }) {
-  function handleLogoutClick() {
-    fetch("/api/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
-        setUser(null);
-      }
-    });
-  }
 
-  return (
-    <Wrapper>
-      <Logo>
-        <Link to="/">Night Life</Link>
-      </Logo>
-      <Nav>
-        <Button as={Link} to="/new">
-          New Event
-        </Button>
-        <Button variant="outline" onClick={handleLogoutClick}>
-          Logout
-        </Button>
-      </Nav>
-    </Wrapper>
-  );
+function NavBar({ user, setUser }) {
+	function handleLogoutClick() {
+		fetch('/api/logout', { method: 'DELETE' }).then((r) => {
+			if (r.ok) {
+				setUser(null);
+			}
+		});
+	}
+	return (	
+		<Wrapper>
+	    <Logo>
+	      <Link to="/">Night Life</Link>
+	    </Logo>
+	    <Nav>
+		<Welcome>
+			Signed in as: {user.username}
+		</Welcome>
+	      <Button as={Link} to="/new">
+	        New Event
+	      </Button>
+	      <Button variant="outline" onClick={handleLogoutClick}>
+	        Logout
+	      </Button>
+	    </Nav>
+	  </Wrapper>
+	)
 }
+export default NavBar;
+
+
+const Welcome = styled.h5`
+	text-transform: uppercase;
+`
 
 const Wrapper = styled.header`
   display: flex;
@@ -57,4 +65,4 @@ const Nav = styled.nav`
   right: 8px;
 `;
 
-export default NavBar;
+
