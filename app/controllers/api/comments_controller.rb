@@ -1,4 +1,5 @@
 class Api::CommentsController < ApplicationController
+    skip_before_action :authorize, only: [:index, :show]
     before_action :find_comment, only: [:show, :update, :destroy]
 
     #GET "/comments" or GET "events/:event_id/comments"

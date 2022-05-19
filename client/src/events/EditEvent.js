@@ -4,15 +4,14 @@ import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label} from "../styles";
 
-function NewEvent({ user }) {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [venue, setVenue] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState([]);
-  const history = useHistory();
+function EditEvent({ eventObj, handleUpdate, handleError }) {
+  const [event, setEvent] = useState({
+    name: eventObj.name,
+    image_url: eventObj.imageUrl,
+    date: eventObj.date,
+    start_time: eventObj.startTime,
+    venue: eventObj.venue
+  })
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -83,7 +82,7 @@ function NewEvent({ user }) {
           <FormField>
             <Label htmlFor="venue">Venue</Label>
             <Input
-              type="text"
+              type="venue"
               id="venue"
               value={venue}
               onChange={(e) => setVenue(e.target.value)}
@@ -125,4 +124,4 @@ const WrapperChild = styled.div`
   flex: 1;
 `;
 
-export default NewEvent;
+export default EditEvent;
