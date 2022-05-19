@@ -7,6 +7,14 @@ before_action :find_event, only: [:show, :update, :destroy]
     render json: Event.preload(:venue).all
   end
 
+  def sort_by_name
+    render json: Event.sort_by_name
+  end
+
+  def sort_by_date
+    render json: Event.sort_by_date
+  end
+
   def show
     render json: @event
   end

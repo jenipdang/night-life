@@ -18,7 +18,7 @@ function NavBar({ user, setUser }) {
 	    </Logo>
 	    <Nav>
 		<Welcome>
-			Signed in as: {user.username}
+			Signed in as: <a href="/profile">{user.username}</a>
 		</Welcome>
 	      <Button as={Link} to="/new">
 	        New Event

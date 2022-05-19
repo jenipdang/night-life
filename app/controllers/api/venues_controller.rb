@@ -1,9 +1,9 @@
 class Api::VenuesController < ApplicationController
-    skip_before_action: :authorize, only: [:index]
+    skip_before_action :authorize, only: [:index]
     before_action :find_venue, only: [:show, :update, :destroy]
     
     def index
-      render json: Venue.all
+      render json: Venue.preload(:events).all
     end
   
     def create
@@ -18,7 +18,7 @@ class Api::VenuesController < ApplicationController
     end
 
     def venue_params
-      params.permit(:name, :address, :city, :state, :zip_code)
+      params.permit(:name, :address, :city, :state, :zip_code, :event)
     end
   
 end

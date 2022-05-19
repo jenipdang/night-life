@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   
   namespace :api do
     resources :users, only: [:update, :destroy]
+    get "/sort-by-name", to: "events#sort_by_name"
+    get "/sort-by-date", to: "events#sort_by_date"
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"

@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import Login from '../pages/Login';
 import NewEvent from '../events/NewEvent'
 import EventsContainer from '../events/EventsContainer';
+import Profile from '../pages/Profile';
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -23,6 +24,9 @@ function App() {
 			<NavBar user={user} setUser={setUser} />
 			<main>
 				<Switch>
+					<Route path='/profile'>
+						<Profile user={user} />
+					</Route>
 					<Route path='/new'>
 						<NewEvent user={user} />
 					</Route>

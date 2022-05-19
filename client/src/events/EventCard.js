@@ -3,7 +3,7 @@ import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link, useParams, useLocation, useHistory } from 'react-router-dom';
 import Loading from '../pages/Loading';
 import './event.css';
-// import EditEvent from './EditEvent';
+import EditEvent from './EditEvent';
 import NewComment from '../comments/NewComment';
 import CommentsList from '../comments/CommentsList';
 import dateformat from 'dateformat'
@@ -35,7 +35,7 @@ const EventCard = ({ event }) => {
 	if (!finalEvent) return <Loading />;
 
 	const handleDelete = () => {
-		fetch(`/suggessions/${id}`, {
+		fetch(`/api/events/${id}`, {
 			method: 'DELETE',
 		}).then(() => history.push('/events'));
 	};
@@ -48,12 +48,14 @@ const EventCard = ({ event }) => {
 		<div className='event-container'>
 			<div className='event-card'>
 				<Card>
-					<Link
+					{!isEditing ? (<>
+						<Link
 						as='h2'
 						style={{
 							textDecoration: 'none',
 							color: 'black',
 							textTransform: 'uppercase',
+							textAlign: 'center',
 						}}
 						to={`/api/events/${finalEvent.id}`}
 					>
@@ -63,7 +65,7 @@ const EventCard = ({ event }) => {
 							src={finalEvent.image_url}
 							alt={finalEvent.name}
 						/>
-						<ListGroup className='list-group-flush'>
+						<ListGroup style={{textAlign: "left"}} className='list-group-flush'>
 							<ListGroupItem>Date: {finalEvent.date ? dateformat(finalEvent.date, 'dddd, mmmm dS yyyy') : ""}</ListGroupItem>
 							<ListGroupItem>
 								Start Time: {finalEvent.start_time ? dateformat(finalEvent.start_time, 'h:MM TT Z') : ""}{' '}
@@ -80,6 +82,10 @@ const EventCard = ({ event }) => {
 							<ListGroupItem>
 								Location: {finalEvent.venue.city}, {finalEvent.venue.state}
 							</ListGroupItem>
+							{location.pathname !== "/events" ? <>
+							<button name='edit' id="edit-btn" onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit</button>
+							<button name='delete' id="delte-btn" onClick={handleDelete}>Delete</button> </> :null}
+							
 						</ListGroup>
 						{location.pathname !== '/events' ? (
 							<>
@@ -93,6 +99,7 @@ const EventCard = ({ event }) => {
 							</>
 						) : null}
 					</Link>
+					</>) : (<EditEvent id={id} event={finalEvent} handleUpdate={handleUpdate} />)}
 				</Card>
 			</div>
 		</div>
