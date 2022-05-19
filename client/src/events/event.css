@@ -1,0 +1,23 @@
+.event-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.event-card {
+    border: 1px solid #eee;
+    max-width: 300px;
+    max-height: 400px;
+    padding: 10px;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 2px 8px 20px #ddd;
+    margin: 10px;
+    transition: 0.5s linear;
+}
+
+.event-card img{
+    max-width: 280px;
+    max-height: 300px;
+    object-fit: contain;
+}

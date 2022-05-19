@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import Loading from '../pages/Loading';
+import './event.css'
 
 const EventCard = ({ event }) => {
 	const [eventObj, setEventObj] = useState(null);
@@ -35,25 +36,27 @@ const EventCard = ({ event }) => {
 	};
 
 	return (
-		<Card style={{ width: '18rem', margin: '10px'}}>
-			<Card.Img variant='top' style={{height: '200px', width: '300px'}} src={event.image_url} />
-			<Card.Body>
-				<Card.Title>{event.name}</Card.Title>
-				{/* <Card.Text>
-					Some quick example text to build on the card title and make up the
-					bulk of the card's content.
-				</Card.Text> */}
-			</Card.Body>
-			<ListGroup className='list-group-flush'>
-				<ListGroupItem>Date: {event.date}</ListGroupItem>
-				<ListGroupItem>Start Time: {event.start_time}</ListGroupItem>
-				<ListGroupItem>Location: {event.venue.name} || {event.venue.city}</ListGroupItem>
-			</ListGroup>
-			{/* <Card.Body>
-				<Card.Link href='#'>Card Link</Card.Link>
-				<Card.Link href='#'>Another Link</Card.Link>
-			</Card.Body> */}
-		</Card>
+		<div className='event-container'>
+      <div className='event-card'>
+        <Card>
+          <Card.Body>
+            <h2>{event.name}</h2>
+          </Card.Body>
+					<img
+						variant='top'
+						src={event.image_url}
+					/>
+					<ListGroup className='list-group-flush'>
+						<ListGroupItem>Date: {event.date}</ListGroupItem>
+						<ListGroupItem>Start Time: {event.start_time}</ListGroupItem>
+						<ListGroupItem>Venue: {event.venue.name}</ListGroupItem>
+						<ListGroupItem>
+							Location: {event.venue.city}, {event.venue.state}
+						</ListGroupItem>
+					</ListGroup>
+				</Card>
+        </div>
+		</div>
 	);
 };
 

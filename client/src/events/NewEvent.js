@@ -9,8 +9,9 @@ function NewEvent({ user }) {
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [venue, setVenue] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState([]);
   const history = useHistory();
 
   function handleSubmit(e) {
@@ -25,6 +26,7 @@ function NewEvent({ user }) {
         name,
         date,
         startTime,
+        imageUrl,
         venue
       }),
     }).then((r) => {
@@ -49,6 +51,15 @@ function NewEvent({ user }) {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </FormField>
+          <FormField>
+            <Label htmlFor="name">Image URL</Label>
+            <Input
+              type="text"
+              id="imageUrl"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
             />
           </FormField>
           <FormField>
@@ -80,7 +91,7 @@ function NewEvent({ user }) {
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Submit Recipe"}
+              {isLoading ? "Loading..." : "Submit Event"}
             </Button>
           </FormField>
           <FormField>
@@ -92,6 +103,7 @@ function NewEvent({ user }) {
       </WrapperChild>
       <WrapperChild>
         <h1>{name}</h1>
+        <h5>{date} || {startTime}</h5>
         <p>
           <cite>By {user.username}</cite>
         </p>
