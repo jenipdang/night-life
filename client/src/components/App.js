@@ -5,6 +5,8 @@ import Login from '../pages/Login';
 import NewEvent from '../events/NewEvent'
 import EventsContainer from '../events/EventsContainer';
 import Profile from '../pages/Profile';
+import EventCard from '../events/EventCard';
+import CommentCard from '../comments/CommentsList';
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -12,7 +14,7 @@ function App() {
 	useEffect(() => {
 		fetch('/api/me').then((r) => {
 			if (r.ok) {
-				r.json().then((data) => setUser(data.user));
+				r.json().then((data) => setUser(data));
 			}
 		});
 	}, []);
@@ -27,8 +29,14 @@ function App() {
 					<Route path='/profile'>
 						<Profile user={user} />
 					</Route>
-					<Route path='/new'>
+					<Route path='/events/new'>
 						<NewEvent user={user} />
+					</Route> 
+					<Route path='/events/:id/comments'>
+						<CommentCard user={user} />
+					</Route> 
+					<Route path='/events/:eventId'>
+						<EventCard user={user}/>
 					</Route>
 					<Route path='/events'>
 						<EventsContainer />

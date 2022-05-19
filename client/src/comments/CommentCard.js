@@ -14,11 +14,13 @@ const CommentCard = ({ comment }) => {
         }
     }, [comment, id])
 
-    const finalComent = comment ? comment : commentObj
-    if (!finalComent) return <Loading /> 
+    const finalComment = comment ? comment : commentObj
+    if (!finalComment) return <Loading /> 
 
   return (
-    <div>{finalComent.content}</div>
+    <div>
+      <h3>{finalComment.content}</h3>
+    </div>
   )
 }
 

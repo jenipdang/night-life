@@ -8,12 +8,14 @@ const CommentsList = ({ comments }) => {
 
 	useEffect(() => {
 		if (!commentsList) {
-			fetch(`/api/${eventId}/comments`)
+			fetch(`/api/events/${eventId}/comments`)
 				.then((r) => {
 					if (r.status === 200) {
-						r.json().then((comments) => setCommentsList(comments));
+						r.json()
+						.then((comments) => setCommentsList(comments));
 					} else {
-						r.json().then((errorObj) => errorObj.error);
+						r.json()
+						.then((errorObj) => errorObj.error);
 					}
 				})
 				.catch((error) => error);
@@ -21,10 +23,12 @@ const CommentsList = ({ comments }) => {
 	}, [eventId, comments]);
 
 	const finalCommentsList = comments ? comments : commentsList;
-	const displayComments = finalCommentsList?.map((comment) => (
-		<CommentCard key={comment.id} comment={comment} />
-	));
-	return <div>{displayComments}</div>;
+	const displayComments = finalCommentsList?.map((comment) => 
+		<CommentCard key={comment.id} comment={comment} /> )
+
+	return (
+		<div>{displayComments}</div>
+	)
 };
 
 export default CommentsList;

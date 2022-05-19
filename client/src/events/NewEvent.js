@@ -20,7 +20,7 @@ const NewEvent = ({ user }) => {
 	const handleChange = (e) => {
 		setEvent({
 			...event,
-			[e.tartget.name]: e.target.value,
+			[e.target.name]: e.target.value,
 		});
 	};
 
@@ -73,7 +73,7 @@ const NewEvent = ({ user }) => {
 						<Label htmlFor='name'>Event Name</Label>
 						<Input
 							type='text'
-							id='name'
+							name='name'
 							value={event.name}
 							onChange={handleChange}
 						/>
@@ -82,7 +82,7 @@ const NewEvent = ({ user }) => {
 						<Label htmlFor='name'>Image URL</Label>
 						<Input
 							type='text'
-							id='imageUrl'
+							name='imageUrl'
 							value={event.imageUrl}
 							onChange={handleChange}
 						/>
@@ -91,7 +91,7 @@ const NewEvent = ({ user }) => {
 						<Label htmlFor='date'>Event Date</Label>
 						<Input
 							type='date'
-							id='date'
+							name='date'
 							value={event.date}
 							onChange={handleChange}
 						/>
@@ -100,7 +100,7 @@ const NewEvent = ({ user }) => {
 						<Label htmlFor='startTime'>Start Time</Label>
 						<Input
 							type='time'
-							id='startTime'
+							name='startTime'
 							value={event.startTime}
 							onChange={handleChange}
 						/>
@@ -109,7 +109,7 @@ const NewEvent = ({ user }) => {
 						<Label htmlFor='venue'>Venue</Label>
 						<Input
 							type='text'
-							id='venue'
+							name='venue'
 							value={event.venue}
 							onChange={handleChange}
 						/>
@@ -131,6 +131,7 @@ const NewEvent = ({ user }) => {
 				<h5>
 					{event.date} || {event.startTime}
 				</h5>
+				<img src={event.imageUrl} alt={event.name}/>
 				<p>
 					<cite>By {user.username}</cite>
 				</p>

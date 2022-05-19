@@ -7,7 +7,7 @@ const CommentsContainer = () => {
 	useEffect(() => {
 		fetch('/api/comments')
 			.then((r) => r.json())
-			.then((data) => setComments(data.data.map((c) => c.attributes)))
+			.then((data) => setComments(data))
 			.catch((err) => alert(err));
 	}, []);
 

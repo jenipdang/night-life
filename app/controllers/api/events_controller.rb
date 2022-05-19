@@ -19,16 +19,22 @@ before_action :find_event, only: [:show, :update, :destroy]
     render json: @event
   end
 
-
   def create
-    @event = current_user.events.create!(event_params)
-    render json: @event, status: :created
+    if params[:venue_id]
+      venue = Venue.find(params[:venue_id])
+      @event = current_user.events.create!(event_params)
+      render json: @event, status: :created
+    else
+      Venue.create(venue_params)
+      @event = current_user.events.create!(event_params)
+      render json: @event, status: :created
+    end
   end
 
 
   #patch "/events/:id"
   def update
-    if current_user.posts.include?(@event)
+    if current_user.events.include?(@event)
       @event&.update!(event_params)
       render json: @event
     else
@@ -38,7 +44,7 @@ before_action :find_event, only: [:show, :update, :destroy]
 
   #delete "/events/:id"
   def destroy
-    if current_user.posts.include?(@event)
+    if current_user.events.include?(@event)
       if @event&.destroy
         render json: { message: "Successfully destroyed event"}
       else
@@ -54,6 +60,10 @@ before_action :find_event, only: [:show, :update, :destroy]
 
     def find_event
       @event = Event.find(params[:id])
+    end
+
+    def venue_params
+      params.permit(:name, :address, :city, :state, :zip_code)
     end
 
     def event_params

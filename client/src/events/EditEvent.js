@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
 import { Button, Error, FormField, Input, Label } from '../styles';
 
 const EditEvent = ({ user, eventObj, handleUpdate }) => {
 	const [event, setEvent] = useState({
 		name: eventObj.name,
 		date: eventObj.date,
-		imageUrl: eventObj.imageUrl,
 		startTime: eventObj.startTime,
-		venue: eventObj.venue,
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +17,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 	const handleChange = (e) => {
 		setEvent({
 			...event,
-			[e.tartget.name]: e.target.value,
+			[e.target.name]: e.target.value,
 		});
 	};
 
@@ -30,9 +27,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 			[
 				event.name,
 				event.date,
-				event.imageUrl,
 				event.startTime,
-				event.venue,
 			].some((val) => val.trim() === '')
 		) {
 			alert('All information must be fill out.');
@@ -41,7 +36,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 		setIsLoading(true);
 
 		fetch('/api/events', {
-			method: 'POST',
+			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -49,14 +44,14 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 				name: event.name,
 				date: event.date,
 				start_time: event.startTime,
-				image_url: event.imageUrl,
-				venue: event.venue,
 			}),
 		})
 			.then((r) => {
 				setIsLoading(false);
 				if (r === 201) {
-					history.push('/events');
+					r.json()
+					.then(data => handleUpdate(data))
+					history.push('/events')
 				} else {
 					r.json().then((err) => setErrors(err.errors));
 				}
@@ -73,17 +68,8 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 						<Label htmlFor='name'>Event Name</Label>
 						<Input
 							type='text'
-							id='name'
+							name='name'
 							value={event.name}
-							onChange={handleChange}
-						/>
-					</FormField>
-					<FormField>
-						<Label htmlFor='name'>Image URL</Label>
-						<Input
-							type='text'
-							id='imageUrl'
-							value={event.imageUrl}
 							onChange={handleChange}
 						/>
 					</FormField>
@@ -91,7 +77,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 						<Label htmlFor='date'>Event Date</Label>
 						<Input
 							type='date'
-							id='date'
+							name='date'
 							value={event.date}
 							onChange={handleChange}
 						/>
@@ -100,23 +86,14 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 						<Label htmlFor='startTime'>Start Time</Label>
 						<Input
 							type='time'
-							id='startTime'
+							name='startTime'
 							value={event.startTime}
 							onChange={handleChange}
 						/>
 					</FormField>
 					<FormField>
-						<Label htmlFor='venue'>Venue</Label>
-						<Input
-							type='text'
-							id='venue'
-							value={event.venue}
-							onChange={handleChange}
-						/>
-					</FormField>
-					<FormField>
 						<Button color='primary' type='submit'>
-							{isLoading ? 'Loading...' : 'Submit Event'}
+							{isLoading ? 'Loading...' : 'Update Event'}
 						</Button>
 					</FormField>
 					<FormField>
@@ -134,7 +111,6 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 				<p>
 					<cite>By {user.username}</cite>
 				</p>
-				<ReactMarkdown>{event.venue}</ReactMarkdown>
 			</WrapperChild>
 		</Wrapper>
 	);

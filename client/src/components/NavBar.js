@@ -20,7 +20,7 @@ function NavBar({ user, setUser }) {
 		<Welcome>
 			Signed in as: <a href="/profile">{user.username}</a>
 		</Welcome>
-	      <Button as={Link} to="/new">
+	      <Button as={Link} to="/events/new">
 	        New Event
 	      </Button>
 	      <Button variant="outline" onClick={handleLogoutClick}>
