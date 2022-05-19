@@ -33,15 +33,16 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px;
+  padding: 15px;
 `;
 
 const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
-  color: deeppink;
+  font-family: "Tangerine", cursive;
+  font-size: 5.5rem;
+  color: black;
   margin: 0;
   line-height: 1;
+  text-shadow: 4px 4px 4px #aaa
 
   a {
     color: inherit;

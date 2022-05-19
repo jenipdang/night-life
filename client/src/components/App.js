@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import NavBar from './NavBar';
 import Login from '../pages/Login';
 import NewEvent from '../events/NewEvent'
-import EventsList from '../events/EventsList';
+import EventsContainer from '../events/EventsContainer';
 
 function App() {
 	const [user, setUser] = useState(null);
@@ -26,8 +26,8 @@ function App() {
 					<Route path='/new'>
 						<NewEvent user={user} />
 					</Route>
-					<Route path='/'>
-						<EventsList />
+					<Route path='/events'>
+						<EventsContainer />
 					</Route>
 				</Switch>
 			</main>

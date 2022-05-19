@@ -13,6 +13,7 @@ const EventsContainer = () => {
 
   return (
     <div>
+        <h1>Upcoming Events</h1>
        <EventsList events={events} />
     </div>
   )
