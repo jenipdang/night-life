@@ -74,7 +74,7 @@ const NewEvent = ({ user }) => {
 				date: event.date,
 				start_time: event.startTime,
 				image_url: event.imageUrl,
-				venue_id: venue.id,
+				venue_id: event.venue.id,
 				user_id: user.id
 			}),
 		})
