@@ -5,6 +5,7 @@
 }
 
 .event-card {
+    display: inline;
     border: 1px solid #eee;
     max-width: 300px;
     max-height: 450px;
@@ -13,11 +14,16 @@
     overflow: hidden;
     box-shadow: 2px 8px 20px #ddd;
     margin: 10px;
-    transition: 0.5s linear;
+    transition: 0.5s;
+    opacity: 1;
 }
 
-.event-card img{
+.event-card img {
     max-width: 280px;
     max-height: 300px;
     object-fit: contain;
+}
+
+.event-card:hover {
+    transform: scale(1.05)
 }
