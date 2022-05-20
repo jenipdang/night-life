@@ -7,12 +7,12 @@ class Api::UsersController < ApplicationController
     render json: user, status: :created
   end
 
-  def ordered_post_events
-    render json: User.post_events
-  end
+  # def ordered_post_events
+  #   render json: User.post_events
+  # end
 
   def show
-    render json: @current_user
+    render json: @current_user, methods: [:post_events]
   end
 
   private

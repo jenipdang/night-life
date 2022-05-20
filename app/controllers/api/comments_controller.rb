@@ -51,6 +51,6 @@ class Api::CommentsController < ApplicationController
     end
 
     def comment_params
-        params.require(:comment).permit(:content, :event_id)
+        params.permit(:user_id, :content, :event_id)
     end
 end

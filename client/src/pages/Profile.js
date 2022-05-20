@@ -3,7 +3,7 @@ const Profile = ({user}) => {
 
  
   return (
-    <div className="container">
+    <div style={{margin: '20px'}} className="container">
       <div className='card mb-3 content'>
         <h1 className='m-3 pt-3'>Profile</h1>
         <div className='card-body'>
@@ -33,7 +33,7 @@ const Profile = ({user}) => {
                 <h5>Posted Events</h5>
               </div>
               <div className='col-md-9 text-secondary'>
-                Events
+                  Events
               </div>
             </div>
           </div>

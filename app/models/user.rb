@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :created_events, foreign_key: :user_id, class_name: "Event", dependent: :destroy
+  has_many :comments, as: :commenter
  
   
   validates :email, presence: true, uniqueness: true, format: {with: /\A(?<username>[^@\s]+)@((?<domain_name>[-a-z0-9]+)\.(?<domain>[a-z]{2,}))\z/i}

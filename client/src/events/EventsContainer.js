@@ -29,7 +29,7 @@ const EventsContainer = () => {
   const searchHandler = (search) => {
     setSearch(search)
     if(search !== '') {
-      const newEvent = searchResult.filter((event) => {
+      const newEvent = events.filter((event) => {
         return (Object.values(event)
           .join(' '))
           .toLowerCase()
