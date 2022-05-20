@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
-import { Button, Error, FormField, Input, Label } from '../styles';
+import { Button, Error, FormField, Input, Label} from '../styles';
 
 const NewEvent = ({ user }) => {
 	const [event, setEvent] = useState({
@@ -13,9 +13,32 @@ const NewEvent = ({ user }) => {
 		venue: '',
 	});
 
+	
 	const [isLoading, setIsLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const history = useHistory();
+	
+	const [venues, setVenues] = useState([])
+
+	useEffect(() => {
+        fetch("/api/venues")
+        .then(r => r.json())
+        .then(data => setVenues(data))
+        .catch(err => alert(err))
+    }, [])
+
+	const venuesOption = venues.map((venue, index) => (
+		<option key={index} value={index}>
+			{venue.name}
+		</option>
+	))
+
+	const handleVenueChange = (e) => {
+		setVenues({
+			...venues,
+			[e.target.name]: e.target.value,
+		})
+	}
 
 	const handleChange = (e) => {
 		setEvent({
@@ -23,6 +46,7 @@ const NewEvent = ({ user }) => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -63,6 +87,7 @@ const NewEvent = ({ user }) => {
 			})
 			.catch((err) => setErrors(err.message));
 	};
+
 
 	return (
 		<Wrapper>
@@ -107,12 +132,12 @@ const NewEvent = ({ user }) => {
 					</FormField>
 					<FormField>
 						<Label htmlFor='venue'>Venue</Label>
-						<Input
-							type='text'
+						<select
 							name='venue'
-							value={event.venue}
-							onChange={handleChange}
-						/>
+							value={venues}
+							onChange={handleVenueChange}
+						> {venuesOption}
+						</select>
 					</FormField>
 					<FormField>
 						<Button color='primary' type='submit'>
