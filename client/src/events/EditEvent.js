@@ -21,6 +21,12 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 		});
 	};
 
+	const updatedEvent = {
+		name: event.name,
+		date: event.date,
+		start_time: event.startTime,
+	}
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (
@@ -35,16 +41,12 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 
 		setIsLoading(true);
 
-		fetch('/api/events', {
+		fetch(`/api/events/${eventObj.id}`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({
-				name: event.name,
-				date: event.date,
-				start_time: event.startTime,
-			}),
+			body: JSON.stringify(updatedEvent),
 		})
 			.then((r) => {
 				setIsLoading(false);
@@ -97,8 +99,8 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 						</Button>
 					</FormField>
 					<FormField>
-						{errors.map((err) => (
-							<Error key={err}>{err}</Error>
+						{errors?.map((error) => (
+							<Error key={error}>{error}</Error>
 						))}
 					</FormField>
 				</form>
