@@ -13,15 +13,23 @@ class Api::CommentsController < ApplicationController
     end
 
     def show #get "/comments/:id"
-        render json: serialized_comment
+        render json: comment
     end
 
-    def create #post "/comments" #post "posts/:post_id/comments"
-        if params[:post_id] 
-            post = Post.find(params[:post_id])
-            @comment = post.comments.create!(comment_params)
-            render json: serialized_comment, status: 201
+    def create #post "/comments" #post "events/:event_id/comments"
+        # if params[:event_id] 
+        #     event = Event.find(params[:event_id])
+        #     @comment = event.comments.create!(event: event, content: params[:content])
+        #     render json: serialized_comment, status: 201
+        # end
+        event = Event.find(params[:event_id])
+        comment = Comment.find_by(event: event, user: @current_user)
+        if comment 
+            comment.update!(comment_params)
+        else
+            comment = @current_user.comments.create!(event: event, content: params[:content])
         end
+        render json: comment, status: :created
     end
 
     def update #patch "/posts/:id"
@@ -46,9 +54,9 @@ class Api::CommentsController < ApplicationController
         @comment = Comment.find(params[:id])
     end
 
-    def serialized_comment
-        @comment.to_json(include: :event)
-    end
+    # def serialized_comment
+    #     @comment.to_json(include: :event)
+    # end
 
     def comment_params
         params.permit(:user_id, :content, :event_id)

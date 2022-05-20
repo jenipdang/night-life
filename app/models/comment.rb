@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :event
   belongs_to :commenter, class_name: "User", foreign_key: :user_id
 
-  validates :content, presence: true, length: { in: 10..2000} 
+  validates :content, presence: true, length: { in: 3..2000} 
   validate :appropriate_word
 
   def appropriate_word

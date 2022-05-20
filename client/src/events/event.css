@@ -7,8 +7,8 @@
 .event-card {
     display: inline;
     border: 1px solid #eee;
-    max-width: 300px;
-    max-height: 450px;
+    /* max-width: 300px;
+    max-height: 450px; */
     padding: 10px;
     margin: auto;
     overflow: hidden;
