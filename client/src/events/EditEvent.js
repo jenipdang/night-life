@@ -6,8 +6,8 @@ import { Button, Error, FormField, Input, Label } from '../styles';
 const EditEvent = ({ user, eventObj, handleUpdate }) => {
 	const [event, setEvent] = useState({
 		name: eventObj.name,
-		date: eventObj.date,
-		startTime: eventObj.startTime,
+		// date: eventObj.date,
+		// startTime: eventObj.startTime,
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -23,8 +23,8 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 
 	const updatedEvent = {
 		name: event.name,
-		date: event.date,
-		start_time: event.startTime,
+		// date: event.date,
+		// start_time: event.startTime,
 	}
 
 	const handleSubmit = (e) => {
@@ -32,8 +32,8 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 		if (
 			[
 				event.name,
-				event.date,
-				event.startTime,
+				// event.date,
+				// event.startTime,
 			].some((val) => val.trim() === '')
 		) {
 			alert('All information must be fill out.');
@@ -53,12 +53,12 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 				if (r === 201) {
 					r.json()
 					.then(data => handleUpdate(data))
-					history.push('/events')
 				} else {
 					r.json().then((err) => setErrors(err.errors));
 				}
 			})
 			.catch((err) => setErrors(err.message));
+			history.push('/events')
 	};
 
 	return (
@@ -75,7 +75,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 							onChange={handleChange}
 						/>
 					</FormField>
-					<FormField>
+					{/* <FormField>
 						<Label htmlFor='date'>Event Date</Label>
 						<Input
 							type='date'
@@ -92,7 +92,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 							value={event.startTime}
 							onChange={handleChange}
 						/>
-					</FormField>
+					</FormField> */}
 					<FormField>
 						<Button color='primary' type='submit'>
 							{isLoading ? 'Loading...' : 'Update Event'}

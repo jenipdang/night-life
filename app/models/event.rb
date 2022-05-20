@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :venue
   belongs_to :user
-  has_many :comments, as: :commenter
+  has_many :comments, dependent: :destroy
 
   has_many :reviews, counter_cache: true 
 
