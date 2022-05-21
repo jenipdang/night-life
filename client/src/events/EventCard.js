@@ -88,10 +88,13 @@ const EventCard = ({ user, event, setEvents }) => {
 								</>
 							) : null}
 							<br />
+							{user?.role === "admin" ? 
+							<>
 							{location.pathname !== "/events" ? <>
 							<button style={{margin: '5px'}} name='edit' id="edit-btn" onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit</button>
 							<button name='delete' id="delte-btn" onClick={handleDelete}>Delete</button> 
-							</> :null}
+							</> :null} </>
+							: null }
 							
 						</ListGroup>
 						{location.pathname !== '/events' ? (
