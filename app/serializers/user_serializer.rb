@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :username, :email
+  attributes :username, :email, :created_at, :role
 
   has_many :created_events
   has_many :comments, as: :commenter

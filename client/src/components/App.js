@@ -4,9 +4,9 @@ import NavBar from './NavBar';
 import Login from '../pages/Login';
 import NewEvent from '../events/NewEvent'
 import EventsContainer from '../events/EventsContainer';
-import Profile from '../pages/Profile';
+import Profile from '../profile/Profile'
 import EventCard from '../events/EventCard';
-import CommentCard from '../comments/CommentsList';
+
 
 function App() {
 	const [user, setUser] = useState(null);
