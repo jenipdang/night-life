@@ -5,7 +5,7 @@ class Api::VenuesController < ApplicationController
     
     def index
       # render json: Venue.all
-      render json: Venue.preload(:events).all
+      render json: Venue.preload(:event).all
     end
   
     def create
