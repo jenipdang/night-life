@@ -7,7 +7,7 @@ import EditEvent from './EditEvent';
 import NewComment from '../comments/NewComment';
 import dateformat from 'dateformat'
 
-const EventCard = ({ user, event }) => {
+const EventCard = ({ user, event, setEvents }) => {
 	const [eventObj, setEventObj] = useState(null);
 	const [comments, setComments] = useState([]);
 	const { eventId } = useParams();
@@ -15,17 +15,22 @@ const EventCard = ({ user, event }) => {
 	const location = useLocation();
 	const [isEditing, setIsEditing] = useState(false);
 
+
 	useEffect(() => {
 		if (!event) {
-			fetch(`/api/events/${eventId}`)
+			fetchEvents()
+		}
+	}, []);
+
+	const fetchEvents = () => {
+		fetch(`/api/events/${eventId}`)
 				.then((r) => r.json())
 				.then((event) => {
 					setEventObj(event);
 					// setComments(event.comments);
 				});
-		}
-	}, [event, eventId]);
-
+	}
+	
 	const addNewComment = (commentObj) => {
 		setComments((currentComments) => [commentObj, ...currentComments]);
 	};
@@ -39,8 +44,10 @@ const EventCard = ({ user, event }) => {
 		}).then(() => history.push('/events'));
 	};
 
-	const handleUpdate = () => {
+	const handleUpdate = (data) => {
 		setIsEditing(true);
+		setEvents((currentEvents) => currentEvents.map((event) => (event.id === data.id ? data : event)))
+		fetchEvents()
 	};
 
 	return (
@@ -99,7 +106,7 @@ const EventCard = ({ user, event }) => {
 								<hr />
 								<ul>
 									{finalEvent.comments.map((comment) => (
-										<li>
+										<li key={comment.id}>
 											<h5>{comment.content}</h5>
 										</li>
 									))}

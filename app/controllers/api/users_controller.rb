@@ -12,7 +12,24 @@ class Api::UsersController < ApplicationController
   # end
 
   def show
-    render json: @current_user, methods: [:post_events]
+    render json: @current_user, include: [:post_events]
+  end
+
+  def update
+    user = @current_user
+    user.update!(paras.permit(:email, :username))
+    render json: user
+    if user.authenticate(params[:old_password])
+      user.update!(params.permit(:password, :password_confirmation))
+      render json: user
+    else
+      render json: { error: "Incorrect old password." }, status: :not_found
+    end
+  end
+
+  def destroy
+    @current_user.destroy
+    head :no_content
   end
 
   private

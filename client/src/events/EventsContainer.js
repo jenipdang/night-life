@@ -9,13 +9,14 @@ const EventsContainer = () => {
   const [searchResult, setSearchResult] = useState([])
 
 	useEffect(() => {
-		fetch('/api/events')
+    if (events.length < 1)
+		{fetch('/api/events')
 			.then((r) => r.json())
 			.then((data) => {
         setEvents(data)
         setSearchResult(data)
       })
-			.catch((err) => alert(err));
+			.catch((err) => alert(err))};
 	}, []);
 
   // const eventsToDisplay = events.sort((event1, event2) => {
@@ -53,7 +54,7 @@ const EventsContainer = () => {
 					</div>
 				</div>
 			</header>
-			<EventsList events={search.length < 1 ? events : searchResult} />
+			<EventsList setEvents={setEvents} events={search.length < 1 ? events : searchResult} />
 		</div>
 	);
 };

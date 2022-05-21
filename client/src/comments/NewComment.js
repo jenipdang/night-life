@@ -18,6 +18,7 @@ const NewComment = ({eventId}) => {
     }
 
     const handleSubmit = (e) => {
+      console.log(e)
       e.preventDefault()
       if ([comment.content].some(val => val.trim() === "")) {
         alert("Comment cannot be empty!")
@@ -31,10 +32,11 @@ const NewComment = ({eventId}) => {
         body: JSON.stringify(comment)
       })
       .then(r => {
+        console.log(r)
         if (r.status === 201) {
           r.json()
           .then(comment => {
-            setComment({content: ""})
+            setComment({content: comment.content})
           })
         } else {
 					r.json().then((err) => setErrors(err.errors));
@@ -48,7 +50,7 @@ const NewComment = ({eventId}) => {
       <>
         <div>
           <h2>Add a Comment</h2>
-          <form onSubmit={handleSubmit}>
+          <form>
             <FormField>
               <Input
                 type='text'
@@ -58,12 +60,12 @@ const NewComment = ({eventId}) => {
               />
             </FormField>
             <FormField>
-              <Button color='primary' type='submit'>
+              <Button onClick={handleSubmit} color='primary' type='submit'>
                 {isLoading ? 'Loading...' : 'Submit'}
               </Button>
             </FormField>
             <FormField>
-              {errors.map((err) => (
+              {errors?.map((err) => (
                 <Error key={err}>{err}</Error>
               ))}
             </FormField>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # get "/comments", to: "comments#index"
   
   namespace :api do
-    resources :users, only: [:update, :destroy]
+    resources :users, only: [:show, :update, :destroy]
     get "/sort-by-name", to: "events#sort_by_name"
     get "/sort-by-date", to: "events#sort_by_date"
     post "/signup", to: "users#create"

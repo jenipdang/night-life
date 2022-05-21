@@ -3,7 +3,7 @@ class Api::VenuesController < ApplicationController
     before_action :find_venue, only: [:show, :update, :destroy]
     
     def index
-      render json: Venue.preload(:comments).all
+      render json: Venue.preload(:events).all
     end
   
     def create

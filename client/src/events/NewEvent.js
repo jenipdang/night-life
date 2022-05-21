@@ -27,7 +27,7 @@ const NewEvent = ({ user }) => {
         .catch(err => alert(err))
     }, [])
 
-	const venuesOption = venues.map((venue, index) => (
+	const venuesOption = venues?.map((venue, index) => (
 		<option key={index} value={index}>
 			{venue.name}
 		</option>
