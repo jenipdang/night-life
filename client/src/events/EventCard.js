@@ -66,28 +66,33 @@ const EventCard = ({ user, event, setEvents }) => {
 						to={`/events/${finalEvent.id}`}
 					>
 						<Card.Body>{finalEvent.name}</Card.Body>
+						<br />
 						<img
 							variant='top'
 							src={finalEvent.image_url}
 							alt={finalEvent.name}
 						/>
+
 						<ListGroup style={{textAlign: "left"}} className='list-group-flush'>
-							<ListGroupItem>Date: {finalEvent.date ? dateformat(finalEvent.date, 'dddd, mmmm dS yyyy') : ""}</ListGroupItem>
+							<br />
+							<ListGroupItem>Date: <em>{finalEvent.date ? dateformat(finalEvent.date, 'dddd, mmmm dS yyyy') : ""}</em></ListGroupItem>
 							<ListGroupItem>
-								Start Time: {finalEvent.start_time ? dateformat(finalEvent.start_time, 'hh:MM TT Z') : ""}{' '}
+								Start Time: <em>{finalEvent.start_time ? dateformat(finalEvent.start_time, 'hh:MM TT Z') : ""}{' '}</em>
 							</ListGroupItem>
-							<ListGroupItem>Venue: {finalEvent.venue.name} </ListGroupItem>
+							<br />
+							<ListGroupItem>Venue: <em>{finalEvent.venue.name}</em></ListGroupItem>
 							{location.pathname !== '/events' ? (
 								<>
-									{' '}
+									{' '} <br/>
 									<ListGroupItem>
-										Address: {finalEvent.venue.address}
+										Address: <em>{finalEvent.venue.address}</em>
 									</ListGroupItem>{' '}
+									<br/>
+									<ListGroupItem>
+										Location: <em>{finalEvent.venue.city}, {finalEvent.venue.state}</em>
+									</ListGroupItem>
 								</>
 							) : null}
-							<ListGroupItem>
-								Location: {finalEvent.venue.city}, {finalEvent.venue.state}
-							</ListGroupItem>
 							<br />
 							{location.pathname !== "/events" ? <>
 							<button style={{margin: '5px'}} name='edit' id="edit-btn" onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit</button>
@@ -107,7 +112,7 @@ const EventCard = ({ user, event, setEvents }) => {
 								<ul>
 									{finalEvent.comments.map((comment) => (
 										<li key={comment.id}>
-											<h5>{comment.content}</h5>
+											<h5>{comment.content} || {comment.commenter.username}</h5>
 										</li>
 									))}
 								</ul>
