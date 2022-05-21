@@ -6,8 +6,6 @@ import { Button, Error, FormField, Input, Label } from '../styles';
 const EditEvent = ({ user, eventObj, handleUpdate }) => {
 	const [event, setEvent] = useState({
 		name: eventObj.name,
-		// date: eventObj.date,
-		// startTime: eventObj.startTime,
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -23,8 +21,6 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 
 	const updatedEvent = {
 		name: event.name,
-		// date: event.date,
-		// start_time: event.startTime,
 	}
 
 	const handleSubmit = (e) => {
@@ -32,8 +28,6 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 		if (
 			[
 				event.name,
-				// event.date,
-				// event.startTime,
 			].some((val) => val.trim() === '')
 		) {
 			alert('All information must be fill out.');
@@ -75,24 +69,6 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 							onChange={handleChange}
 						/>
 					</FormField>
-					{/* <FormField>
-						<Label htmlFor='date'>Event Date</Label>
-						<Input
-							type='date'
-							name='date'
-							value={event.date}
-							onChange={handleChange}
-						/>
-					</FormField>
-					<FormField>
-						<Label htmlFor='startTime'>Start Time</Label>
-						<Input
-							type='time'
-							name='startTime'
-							value={event.startTime}
-							onChange={handleChange}
-						/>
-					</FormField> */}
 					<FormField>
 						<Button color='primary' type='submit'>
 							{isLoading ? 'Loading...' : 'Update Event'}

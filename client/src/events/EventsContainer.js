@@ -3,20 +3,21 @@ import EventsList from './EventsList';
 import Search from './Search';
 
 
+
 const EventsContainer = () => {
 	const [events, setEvents] = useState([]);
   const [search, setSearch] = useState('')
   const [searchResult, setSearchResult] = useState([])
 
+
 	useEffect(() => {
-    if (events.length < 1)
-		{fetch('/api/events')
+		fetch('/api/events')
 			.then((r) => r.json())
 			.then((data) => {
         setEvents(data)
         setSearchResult(data)
       })
-			.catch((err) => alert(err))};
+			.catch((err) => alert(err));
 	}, []);
 
   // const eventsToDisplay = events.sort((event1, event2) => {

@@ -45,7 +45,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def serialized_comment
-        @comment.to_json(include: :event)
+        @comment.to_json
     end
 
     def comment_params

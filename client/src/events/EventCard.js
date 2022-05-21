@@ -15,22 +15,17 @@ const EventCard = ({ user, event, setEvents }) => {
 	const location = useLocation();
 	const [isEditing, setIsEditing] = useState(false);
 
-
+	
 	useEffect(() => {
 		if (!event) {
-			fetchEvents()
+			fetch(`/api/events/${eventId}`)
+			.then((r) => r.json())
+			.then((event) => {
+				setEventObj(event);
+			});
 		}
-	}, []);
+	}, [event, eventId]);
 
-	const fetchEvents = () => {
-		fetch(`/api/events/${eventId}`)
-				.then((r) => r.json())
-				.then((event) => {
-					setEventObj(event);
-					// setComments(event.comments);
-				});
-	}
-	
 	const addNewComment = (commentObj) => {
 		setComments((currentComments) => [commentObj, ...currentComments]);
 	};
@@ -46,8 +41,7 @@ const EventCard = ({ user, event, setEvents }) => {
 
 	const handleUpdate = (data) => {
 		setIsEditing(true);
-		setEvents((currentEvents) => currentEvents.map((event) => (event.id === data.id ? data : event)))
-		fetchEvents()
+		// setEvents((currentEvents) => currentEvents.map((event) => (event.id === data.id ? data : event)))
 	};
 
 	return (
@@ -112,7 +106,7 @@ const EventCard = ({ user, event, setEvents }) => {
 								<ul>
 									{finalEvent.comments.map((comment) => (
 										<li key={comment.id}>
-											<h5>{comment.content} || {comment.commenter.username}</h5>
+											<h5>{comment.content} || {comment.post_by}</h5>
 										</li>
 									))}
 								</ul>

@@ -1,8 +1,10 @@
 class Api::VenuesController < ApplicationController
     skip_before_action :authorize, only: [:index]
+    before_action :check_admin, except: [:index, :show]
     before_action :find_venue, only: [:show, :update, :destroy]
     
     def index
+      # render json: Venue.all
       render json: Venue.preload(:events).all
     end
   
@@ -21,4 +23,8 @@ class Api::VenuesController < ApplicationController
       params.permit(:name, :address, :city, :state, :zip_code, :event)
     end
   
+    def check_admin
+      render json: { errors: ["Not Authorized"]}, status: :unauthorized unless @current_user.admin?
+    end
+    
 end

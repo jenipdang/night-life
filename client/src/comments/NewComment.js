@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Button, Error, FormField, Input} from '../styles';
 
 
@@ -9,6 +10,7 @@ const NewComment = ({eventId}) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
+    const history = useHistory()
 
     const handleChange = (e) => {
       setComment({
@@ -32,7 +34,7 @@ const NewComment = ({eventId}) => {
         body: JSON.stringify(comment)
       })
       .then(r => {
-        console.log(r)
+        setIsLoading(false);
         if (r.status === 201) {
           r.json()
           .then(comment => {
@@ -43,6 +45,7 @@ const NewComment = ({eventId}) => {
 				}
 			})
 			.catch((err) => setErrors(err.message));
+      history.push('/events')
     }
     
 

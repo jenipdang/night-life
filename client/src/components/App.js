@@ -32,9 +32,9 @@ function App() {
 					<Route path='/events/new'>
 						<NewEvent user={user} />
 					</Route> 
-					<Route path='/events/:id/comments'>
+					{/* <Route path='/events/:id/comments'>
 						<CommentCard user={user} />
-					</Route> 
+					</Route>  */}
 					<Route path='/events/:eventId'>
 						<EventCard user={user}/>
 					</Route>
