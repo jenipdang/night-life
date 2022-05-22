@@ -22,7 +22,7 @@ class Api::CommentsController < ApplicationController
         render json: comment, status: :created
     end
 
-    def update #patch "/posts/:id"
+    def update #patch "/comment/:id"
         if (@comment.commenter == @current_user || @current_user.admin?)
             render json: serialized_comment
         else
@@ -30,7 +30,7 @@ class Api::CommentsController < ApplicationController
         end
     end
 
-    def destroy #delete "/posts/:id"
+    def destroy #delete "/comment/:id"
         if @comment&.destroy
             render json: {message: "Successfully destroyed comment!"}
         else

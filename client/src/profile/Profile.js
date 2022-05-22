@@ -4,8 +4,55 @@ import './profile.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import { Alert } from '@mui/material';
 
 const Profile = ({ user }) => {
+	const [userObj, setUserObj] = useState({
+		username: user.username,
+		email: user.email
+	})
+
+	const handleChange = (e) => {
+		setUserObj({
+			...userObj,
+			[e.target.name]: e.target.value
+		})
+	}
+
+	const updatedUserInfo = {
+		username: userObj.username,
+		email: userObj.email
+	}
+
+	const handleUpdateUser = (updatedUserObj) => {
+		setUserObj(updatedUserObj)
+	}
+
+	const handleSubmit = (e) => {
+		e.prevenutDefault()
+		if([userObj.username, userObj.email].some((val) => val.trim() === ''))
+		{
+			alert('Fields cannot be empty.')
+		}
+
+		fetch(`/api/users/${user.id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(updatedUserInfo)
+		})
+		.then((r) => {
+			if (r === 201) {
+				r.json()
+				.then(data => handleUpdateUser(data))
+			} else {
+				r.json().then((err) => Alert(err.errors))
+			}
+		})
+		.catch((err) => Alert(err.message))
+	}
+
 	return (
 		<>
 			<div className='user'>
@@ -38,7 +85,7 @@ const Profile = ({ user }) => {
 					</div>
 					<div className='userUpdate'>
 						<span className='userUpdateTitle'>Edit</span>
-						<form className='userUpdateForm'>
+						<form className='userUpdateForm' onSubmit={handleSubmit}>
 							<div className='userUpdateLeft'>
 								<div className='userUpdateItem'>
 									<label>Username</label>
@@ -46,6 +93,7 @@ const Profile = ({ user }) => {
 										type='text'
 										placeholder={user.username}
 										className='userUpdateInput'
+										onChange={handleChange}
 									/>
 								</div>
 								<div className='userUpdateItem'>
@@ -54,6 +102,7 @@ const Profile = ({ user }) => {
 										type='text'
 										placeholder={user.email}
 										className='userUpdateInput'
+										onChange={handleChange}
 									/>
 								</div>
 							</div>

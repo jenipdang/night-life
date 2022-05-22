@@ -39,9 +39,9 @@ const EventCard = ({ user, event, setEvents }) => {
 		}).then(() => history.push('/events'));
 	};
 
-	const handleUpdate = (data) => {
-		setIsEditing(true);
-		// setEvents((currentEvents) => currentEvents.map((event) => (event.id === data.id ? data : event)))
+	const handleUpdate = (updatedEventObj) => {
+		setIsEditing(true)
+		setEventObj(updatedEventObj)
 	};
 
 	return (
