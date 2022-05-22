@@ -1,4 +1,4 @@
-import './profile.css';
+
 const Profile = ({ user }) => {
 	return (
 		<div style={{ margin: '20px' }} className='container'>

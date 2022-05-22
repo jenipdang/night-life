@@ -19,11 +19,13 @@ function NavBar({ user, setUser }) {
 	    </Logo>
 	    <Nav>
 		<Welcome>
-			Signed in as: <a href="/profile">{user.username}</a>
+			Welcome: <a href="/profile">{user.username}</a>
 		</Welcome>
-			{(user.role === "admin") ? (<Button as={Link} to="/events/new">
+
+		{(user.role === "admin") ? (<Button as={Link} to="/events/new">
 	        New Event
-	      </Button>) : null}
+	    </Button>) : null}
+
 	      <Button variant="outline" onClick={handleLogoutClick}>
 	        Logout
 	      </Button>

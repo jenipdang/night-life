@@ -97,8 +97,6 @@
       justify-content: space-between;
   }
   
-
-  
   .userUpdateIcon{
       cursor: pointer;
   }
@@ -111,4 +109,8 @@
       background-color: darkblue;
       color: white;
       font-weight: 600;
+  }
+
+  .userActivityList{
+    display: flex;
   }
