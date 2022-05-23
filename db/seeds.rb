@@ -1,20 +1,20 @@
 puts "📃 Seeding users..."
 
 jeni = User.create!(username: "jenidang", email: "jenidang@gmail.com", password: "1234567jd", role: 1)
-francis = User.create!(username: "francisdang", email: "francisdang@gmail.com", password: "1234567fd")
+francis = User.create!(username: "francisdang", email: "francisdang@gmail.com", password: "1234567fd", role: 1)
 racheal = User.create!(username: "racheal", email: "racheal2022@gmail.com", password: "1234567ra")
 matteo = User.create!(username: "racheal", email: "matteo111@gmail.com", password: "1234567ma")
 
 
 puts "📃 Seeding venues..."
-v1 = Venue.create!(name: "Time Nightclub", address: "1875 Newport Blvd B245", city: "Costa Mesa", state: "CA", zip_code: "92627")
-v2 = Venue.create!(name: "OC Fair & Event Center", address:"88 Fair Dr.", city: "Costa Mesa", state: "CA", zip_code: "92626")
-v3 = Venue.create!(name: "Corner Crossing", address: "9550 Bolsa Ave. Ste 115A", city: "Westminster", state: "CA", zip_code: "92683")
-v4 = Venue.create!(name: "ACE Beer Club", address: "9622 Garden Grove Blvd. Ste 102", city: "Garden Grove", state: "CA", zip_code: "92844")
-v5 = Venue.create!(name: "Bay Grill & Karaoke", address: "11951 Beach Blvd Ste J", city: "Stanton", state: "CA", zip_code: "90680")
-v3 = Venue.create!(name: "Fountain Valley Skating Center", address: "9105 Recreation Cir", city: "Fountain Valley", state: "CA", zip_code: "92708")
-v4 = Venue.create!(name: "Arrow Tag OC", address: "1815 E Wilshire Ave #909", city: "Santa Ana", state: "CA", zip_code: "92705")
-v5 = Venue.create!(name: "Yoga on the Beach", address: "Tower 14", city: "Huntington Beach", state: "CA", zip_code: "92648")
+v1 = Venue.create!(name: "Time Nightclub", address: "1875 Newport Blvd B245", city: "Costa Mesa", state: "CA", zip_code: "92627", user_id: jeni.id)
+v2 = Venue.create!(name: "OC Fair & Event Center", address:"88 Fair Dr.", city: "Costa Mesa", state: "CA", zip_code: "92626", user_id: jeni.id)
+v3 = Venue.create!(name: "Corner Crossing", address: "9550 Bolsa Ave. Ste 115A", city: "Westminster", state: "CA", zip_code: "92683", user_id: jeni.id)
+v4 = Venue.create!(name: "ACE Beer Club", address: "9622 Garden Grove Blvd. Ste 102", city: "Garden Grove", state: "CA", zip_code: "92844", user_id: jeni.id)
+v5 = Venue.create!(name: "Bay Grill & Karaoke", address: "11951 Beach Blvd Ste J", city: "Stanton", state: "CA", zip_code: "90680", user_id: francis.id)
+v3 = Venue.create!(name: "Fountain Valley Skating Center", address: "9105 Recreation Cir", city: "Fountain Valley", state: "CA", zip_code: "92708", user_id: jeni.id)
+v4 = Venue.create!(name: "Arrow Tag OC", address: "1815 E Wilshire Ave #909", city: "Santa Ana", state: "CA", zip_code: "92705", user_id: francis.id)
+v5 = Venue.create!(name: "Yoga on the Beach", address: "Tower 14", city: "Huntington Beach", state: "CA", zip_code: "92648", user_id: jeni.id)
 
 puts "📃 Seeding events..."
 e1 = Event.create!(name: "Kim Lee", image_url: "https://timenightclub.com/wp-content/uploads/2022/04/05-20-22_KIM_LEE_2_2160x1080_Eventbrite-1920x960.jpg", date: "Friday, May 20, 2022", start_time: "21:30", venue_id: v1.id, user_id: jeni.id)

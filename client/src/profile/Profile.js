@@ -113,6 +113,7 @@ const Profile = ({ user }) => {
 					</div>
 				</div>
 			</div>
+			<div className='user'>
 			{(user.role === "admin") ?  	
 			(<div className='userShow'>
       		<span className='userShowTitle'>Posted Events</span>
@@ -120,6 +121,18 @@ const Profile = ({ user }) => {
 						{user.created_events?.map((created_event) => (
 							<li key={created_event.id}>
 								<h5 className='userShowInfoTitle'>{created_event.name}</h5>
+							</li>
+						))}
+					</ul>
+			</div>) : null
+			}
+			{(user.role === "admin") ?  	
+			(<div className='userShow'>
+      		<span className='userShowTitle'>Posted Venues</span>
+					<ul>
+						{user.created_venues?.map((created_venue) => (
+							<li key={created_venue.id}>
+								<h5 className='userShowInfoTitle'>{created_venue.name}</h5>
 							</li>
 						))}
 					</ul>
@@ -134,6 +147,7 @@ const Profile = ({ user }) => {
 							</li>
 						))}
 					</ul>
+			</div>
 			</div>
 		</>
 	);

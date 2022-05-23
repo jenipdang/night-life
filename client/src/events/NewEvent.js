@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
-import { Button, Error, FormField, Input, Label} from '../styles';
+import { Button, Error, FormField, Input, Label } from '../styles';
 
 const NewEvent = ({ user }) => {
 	const [event, setEvent] = useState({
@@ -13,32 +13,30 @@ const NewEvent = ({ user }) => {
 		venue: '',
 	});
 
-	
 	const [isLoading, setIsLoading] = useState(false);
 	const [errors, setErrors] = useState([]);
 	const history = useHistory();
-	
-	const [venues, setVenues] = useState([])
+	const [venues, setVenues] = useState([]);
 
 	useEffect(() => {
-        fetch("/api/venues")
-        .then(r => r.json())
-        .then(data => setVenues(data))
-        .catch(err => alert(err))
-    }, [])
+		fetch('/api/venues')
+			.then((r) => r.json())
+			.then((data) => setVenues(data))
+			.catch((err) => alert(err));
+	}, []);
 
-	const venuesOption = venues?.map((venue, index) => (
-		<option key={index} value={index}>
+	const venuesOption = venues?.map((venue) => (
+		<option key={venue.id} value={venue}>
 			{venue.name}
 		</option>
-	))
+	));
 
-	const handleVenueChange = (e) => {
+	const handleSelect = (e) => {
 		setVenues({
 			...venues,
 			[e.target.name]: e.target.value,
-		})
-	}
+		});
+	};
 
 	const handleChange = (e) => {
 		setEvent({
@@ -47,6 +45,16 @@ const NewEvent = ({ user }) => {
 		});
 	};
 
+	const newEvent = {
+		name: event.name,
+		date: event.date,
+		start_time: event.startTime,
+		image_url: event.imageUrl,
+		venue_id: event.venue.id,
+		user_id: user.id,
+	}
+
+	console.log(NewEvent)
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -56,7 +64,7 @@ const NewEvent = ({ user }) => {
 				event.date,
 				event.imageUrl,
 				event.startTime,
-				event.venue,
+				event.venue.id,
 			].some((val) => val.trim() === '')
 		) {
 			alert('All information must be fill out.');
@@ -69,14 +77,7 @@ const NewEvent = ({ user }) => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({
-				name: event.name,
-				date: event.date,
-				start_time: event.startTime,
-				image_url: event.imageUrl,
-				venue_id: event.venue.id,
-				user_id: user.id
-			}),
+			body: JSON.stringify(newEvent),
 		})
 			.then((r) => {
 				setIsLoading(false);
@@ -88,7 +89,6 @@ const NewEvent = ({ user }) => {
 			})
 			.catch((err) => setErrors(err.message));
 	};
-
 
 	return (
 		<Wrapper>
@@ -136,7 +136,7 @@ const NewEvent = ({ user }) => {
 						<select
 							name='venue'
 							value={venues}
-							onChange={handleVenueChange}
+							onChange={handleSelect}
 						> {venuesOption}
 						</select>
 					</FormField>
@@ -146,7 +146,7 @@ const NewEvent = ({ user }) => {
 						</Button>
 					</FormField>
 					<FormField>
-						{errors.map((err) => (
+						{errors?.map((err) => (
 							<Error key={err}>{err}</Error>
 						))}
 					</FormField>
@@ -157,7 +157,8 @@ const NewEvent = ({ user }) => {
 				<h5>
 					{event.date} || {event.startTime}
 				</h5>
-				<img src={event.imageUrl} alt={event.name}/>
+				
+				<img src={event.imageUrl} alt={event.name} />
 				<p>
 					<cite>By {user.username}</cite>
 				</p>

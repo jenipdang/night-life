@@ -26,7 +26,7 @@ class Api::CommentsController < ApplicationController
         if (@comment.commenter == @current_user || @current_user.admin?)
             render json: serialized_comment
         else
-            render json: {error: @comment.errors.full_messages.to_sentence}
+            render json: {errors: @comment.errors.full_messages.to_sentence}
         end
     end
 
@@ -34,7 +34,7 @@ class Api::CommentsController < ApplicationController
         if @comment&.destroy
             render json: {message: "Successfully destroyed comment!"}
         else
-            render json: {error: @comment.errors.full_messages.to_sentence}
+            render json: {errors: @comment.errors.full_messages.to_sentence}
         end
     end
 

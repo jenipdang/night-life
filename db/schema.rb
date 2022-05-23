@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_20_184816) do
+ActiveRecord::Schema.define(version: 2022_05_23_021757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,10 +55,13 @@ ActiveRecord::Schema.define(version: 2022_05_20_184816) do
     t.integer "zip_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_venues_on_user_id"
   end
 
   add_foreign_key "comments", "events"
   add_foreign_key "comments", "users"
   add_foreign_key "events", "users"
   add_foreign_key "events", "venues"
+  add_foreign_key "venues", "users"
 end

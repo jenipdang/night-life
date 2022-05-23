@@ -21,7 +21,7 @@ class Api::UsersController < ApplicationController
       user.update!(params.permit(:email, :username))
       render json: @current_user
     else
-      render json: { error: "Incorrect old password." }, status: :not_found
+      render json: { errors: "Incorrect old password." }, status: :not_found
     end
   end
 
