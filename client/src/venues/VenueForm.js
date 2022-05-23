@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
 import { Button, Error, FormField, Input, Label } from '../styles';
 
 const VenueForm = ({ user }) => {
@@ -60,12 +59,12 @@ const VenueForm = ({ user }) => {
 			.then((r) => {
 				setIsLoading(false);
 				if (r === 201) {
-					history.push('/events/new');
-				} else {
-					r.json().then((err) => setErrors(err.errors));
+                } else {
+                    r.json().then((err) => setErrors(err.errors));
 				}
 			})
 			.catch((err) => setErrors(err.message));
+            history.push('/events/new');
 	};
 
 	return (
@@ -141,7 +140,6 @@ const VenueForm = ({ user }) => {
 				<p>
 					<cite>By {user.username}</cite>
 				</p>
-				<ReactMarkdown>{venue}</ReactMarkdown>
 			</WrapperChild>
 		</Wrapper>
 	);

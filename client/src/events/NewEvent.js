@@ -54,8 +54,6 @@ const NewEvent = ({ user }) => {
 		user_id: user.id,
 	}
 
-	console.log(NewEvent)
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (
