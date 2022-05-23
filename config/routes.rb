@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :update, :destroy]
     get "/sort-by-name", to: "events#sort_by_name"
     get "/sort-by-date", to: "events#sort_by_date"
+    get "/upcoming-events", to: "events#upcoming_events"
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"

@@ -1,7 +1,7 @@
 class Api::EventsController < ApplicationController
 
-skip_before_action :authorize, only: [:index, :show]
-before_action :check_admin, except: [:index, :show]
+skip_before_action :authorize, only: [:index, :show, :upcoming_events]
+before_action :check_admin, except: [:index, :show, :upcoming_events]
 before_action :find_event, only: [:show, :update, :destroy]
   
   def index
@@ -15,6 +15,10 @@ before_action :find_event, only: [:show, :update, :destroy]
 
   def sort_by_date
     render json: Event.sort_by_date
+  end
+
+  def upcoming_events
+    render json: Event.upcoming_events
   end
 
   def show
