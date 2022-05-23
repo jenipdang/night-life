@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { Link } from 'react-router-dom'
 import dateformat from 'dateformat';
 import './profile.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
@@ -143,7 +143,7 @@ const Profile = ({ user }) => {
 					<ul>
 						{user.comments?.map((comment) => (
 							<li key={comment.id}>
-								<h5 className='userShowInfoTitle' >{comment.content}</h5>
+								<Link to={`/comments/${comment.id}`} className='userShowInfoTitle' ><h5>{comment.content}</h5></Link>
 							</li>
 						))}
 					</ul>

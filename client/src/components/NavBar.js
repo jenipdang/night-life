@@ -19,7 +19,7 @@ function NavBar({ user, setUser }) {
 	    </Logo>
 	    <Nav>
 		<Welcome>
-			Welcome: <a href="/profile">{user.username}</a>
+			Welcome: <Link to="/profile">{user.username}</Link>
 		</Welcome>
 
 		{(user.role === "admin") ? (<Button as={Link} to="/events/new">

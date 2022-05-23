@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { Link, useParams, useHistory, useLocation } from 'react-router-dom';
 import Loading from '../pages/Loading';
 import EditComment from './EditComment';
 
 const CommentCard = ({ user, comment }) => {
 	const { commentId } = useParams();
-	const [commentObj, setCommentObj] = useState(null);
+	const [commentObj, setCommentObj] = useState({});
 	const history = useHistory();
+	const location = useLocation()
 	const [isEditing, setIsEditing] = useState(false);
 
 	useEffect(() => {
@@ -33,7 +34,7 @@ const CommentCard = ({ user, comment }) => {
 	};
 
 	return (
-		<div>
+		<div className='container'>
 			{!isEditing ? (
 				<>
 					<Link
@@ -47,8 +48,9 @@ const CommentCard = ({ user, comment }) => {
 					>
 						<h5>|| {finalComment.post_by} || </h5>
 						<p>{finalComment.content}</p>
-						{/* {user === finalComment.post_by ? (
-							<>
+						{/* {user === finalComment.post_by && location.pathname !== '/comments'? ( */}
+						{/* {location?.pathname === '/comments' ? 
+							<> */}
 								<button
 									style={{ margin: '5px' }}
 									name='edit'
@@ -60,17 +62,8 @@ const CommentCard = ({ user, comment }) => {
 								<button name='delete' id='delte-btn' onClick={handleDelete}>
 									Delete
 								</button>
-							</>
-						) : null} */}
-						<button
-							style={{ margin: '5px' }}
-							name='edit'
-							id='edit-btn'
-							onClick={() => setIsEditing((isEditing) => !isEditing)}
-							> Edit</button>
-						<button name='delete' id='delte-btn' onClick={handleDelete}>
-							Delete
-						</button>
+							{/* </>
+						: null} */}
 					</Link>
 				</>
 			) : (

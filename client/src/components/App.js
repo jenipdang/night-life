@@ -34,11 +34,11 @@ function App() {
 					<Route path='/events/new'>
 						<NewEvent user={user} />
 					</Route> 
-					<Route path='/events/:id/comments'>
-						<CommentsList user={user} />
-					</Route> 
 					<Route path='/comments/:commentId'>
 						<CommentCard user={user} />
+					</Route> 
+					<Route path='/events/:id/comments'>
+						<CommentsList user={user} />
 					</Route> 
 					<Route path='/events/:eventId'>
 						<EventCard user={user}/>
