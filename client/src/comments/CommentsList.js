@@ -23,6 +23,7 @@ const CommentsList = ({ comments }) => {
 	}, [eventId, comments]);
 
 	const finalCommentsList = comments ? comments : commentsList;
+	
 	const displayComments = finalCommentsList?.map((comment) => 
 		<CommentCard key={comment.id} comment={comment} /> )
 

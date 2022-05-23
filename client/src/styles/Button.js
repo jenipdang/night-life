@@ -6,8 +6,8 @@ const COLORS = {
     "--accent": "white",
   },
   secondary: {
-    "--main": "lavenderblush",
-    "--accent": "indigo",
+    "--main": "lightgrey",
+    "--accent": "black",
   },
 };
 

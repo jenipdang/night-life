@@ -6,6 +6,7 @@ import NewEvent from '../events/NewEvent'
 import EventsContainer from '../events/EventsContainer';
 import Profile from '../profile/Profile'
 import EventCard from '../events/EventCard';
+import CommentsList from '../comments/CommentsList';
 
 
 function App() {
@@ -32,9 +33,9 @@ function App() {
 					<Route path='/events/new'>
 						<NewEvent user={user} />
 					</Route> 
-					{/* <Route path='/events/:id/comments'>
-						<CommentCard user={user} />
-					</Route>  */}
+					<Route path='/events/:id/comments'>
+						<CommentsList user={user} />
+					</Route> 
 					<Route path='/events/:eventId'>
 						<EventCard user={user}/>
 					</Route>

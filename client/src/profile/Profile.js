@@ -1,57 +1,57 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import dateformat from 'dateformat';
 import './profile.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import { Alert } from '@mui/material';
+// import { Alert } from '@mui/material';
 
 const Profile = ({ user }) => {
-	const [userObj, setUserObj] = useState({
-		username: user.username,
-		email: user.email
-	})
+	// const [userObj, setUserObj] = useState({
+	// 	username: user.username,
+	// 	email: user.email
+	// })
 
-	const handleChange = (e) => {
-		setUserObj({
-			...userObj,
-			[e.target.name]: e.target.value
-		})
-	}
+	// const handleChange = (e) => {
+	// 	setUserObj({
+	// 		...userObj,
+	// 		[e.target.name]: e.target.value
+	// 	})
+	// }
 
-	const updatedUserInfo = {
-		username: userObj.username,
-		email: userObj.email
-	}
+	// const updatedUserInfo = {
+	// 	username: userObj.username,
+	// 	email: userObj.email
+	// }
 
-	const handleUpdateUser = (updatedUserObj) => {
-		setUserObj(updatedUserObj)
-	}
+	// const handleUpdateUser = (updatedUserObj) => {
+	// 	setUserObj(updatedUserObj)
+	// }
 
-	const handleSubmit = (e) => {
-		e.prevenutDefault()
-		if([userObj.username, userObj.email].some((val) => val.trim() === ''))
-		{
-			alert('Fields cannot be empty.')
-		}
+	// const handleSubmit = (e) => {
+	// 	e.prevenutDefault()
+	// 	if([userObj.username, userObj.email].some((val) => val.trim() === ''))
+	// 	{
+	// 		alert('Fields cannot be empty.')
+	// 	}
 
-		fetch(`/api/users/${user.id}`, {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(updatedUserInfo)
-		})
-		.then((r) => {
-			if (r === 201) {
-				r.json()
-				.then(data => handleUpdateUser(data))
-			} else {
-				r.json().then((err) => Alert(err.errors))
-			}
-		})
-		.catch((err) => Alert(err.message))
-	}
+	// 	fetch(`/api/users/${user.id}`, {
+	// 		method: 'PATCH',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify(updatedUserInfo)
+	// 	})
+	// 	.then((r) => {
+	// 		if (r === 201) {
+	// 			r.json()
+	// 			.then(data => handleUpdateUser(data))
+	// 		} else {
+	// 			r.json().then((err) => Alert(err.errors))
+	// 		}
+	// 	})
+	// 	.catch((err) => Alert(err.message))
+	// }
 
 	return (
 		<>
@@ -83,7 +83,7 @@ const Profile = ({ user }) => {
 							</div>
 						</div>
 					</div>
-					<div className='userUpdate'>
+					{/* <div className='userUpdate'>
 						<span className='userUpdateTitle'>Edit</span>
 						<form className='userUpdateForm' onSubmit={handleSubmit}>
 							<div className='userUpdateLeft'>
@@ -110,7 +110,7 @@ const Profile = ({ user }) => {
 								<button className='userUpdateButton'>Update</button>
 							</div>
 						</form>
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className='user'>

@@ -17,12 +17,8 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if @current_user || @current_user.admin?
-      user.update!(params.permit(:email, :username))
+      @current_user.update!(params.permit(:email, :username))
       render json: @current_user
-    else
-      render json: { errors: "Incorrect old password." }, status: :not_found
-    end
   end
 
   def destroy

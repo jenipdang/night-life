@@ -19,7 +19,8 @@ const CommentCard = ({ comment }) => {
 
   return (
     <div>
-      <h3>{finalComment.content}</h3>
+      <h5>|| {finalComment.post_by} || </h5>
+      <h7>{finalComment.content}</h7>
     </div>
   )
 }

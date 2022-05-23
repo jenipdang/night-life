@@ -6,6 +6,7 @@ import './event.css';
 import EditEvent from './EditEvent';
 import NewComment from '../comments/NewComment';
 import dateformat from 'dateformat'
+import CommentsList from '../comments/CommentsList';
 
 const EventCard = ({ user, event, setEvents }) => {
 	const [eventObj, setEventObj] = useState(null);
@@ -22,6 +23,7 @@ const EventCard = ({ user, event, setEvents }) => {
 			.then((r) => r.json())
 			.then((event) => {
 				setEventObj(event);
+				setComments(event.comments)
 			});
 		}
 	}, [event, eventId]);
@@ -106,13 +108,14 @@ const EventCard = ({ user, event, setEvents }) => {
 								/>
 								<br />
 								<hr />
-								<ul>
+								<CommentsList comments={comments} />
+								{/* <ul>
 									{finalEvent.comments.map((comment) => (
 										<li key={comment.id}>
 											<h5>{comment.content} || {comment.post_by}</h5>
 										</li>
 									))}
-								</ul>
+								</ul> */}
 							</>
 						) : null}
 					</Link>
