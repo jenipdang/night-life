@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { Button, Error, FormField, Input, Label } from '../styles';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 const NewEvent = ({ user }) => {
 	const [event, setEvent] = useState({
@@ -17,6 +19,7 @@ const NewEvent = ({ user }) => {
 	const [errors, setErrors] = useState([]);
 	const history = useHistory();
 	const [venues, setVenues] = useState([]);
+	const [value, setValue] = useState('')
 
 	useEffect(() => {
 		fetch('/api/venues')
@@ -25,17 +28,18 @@ const NewEvent = ({ user }) => {
 			.catch((err) => alert(err));
 	}, []);
 
-	const venuesOption = venues?.map((venue) => (
-		<option key={venue.id} value={venue}>
+
+	const venueOption = venues?.map((venue) => (
+		<Dropdown.Item eventKey={venue.id} value={venue}>
 			{venue.name}
-		</option>
+		</Dropdown.Item>
 	));
 
+	console.log(venueOption)
+
 	const handleSelect = (e) => {
-		setVenues({
-			...venues,
-			[e.target.name]: e.target.value,
-		});
+		console.log(e)
+		setValue(e);
 	};
 
 	const handleChange = (e) => {
@@ -50,9 +54,9 @@ const NewEvent = ({ user }) => {
 		date: event.date,
 		start_time: event.startTime,
 		image_url: event.imageUrl,
-		venue_id: event.venue.id,
+		venue_id: value.id,
 		user_id: user.id,
-	}
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -62,7 +66,7 @@ const NewEvent = ({ user }) => {
 				event.date,
 				event.imageUrl,
 				event.startTime,
-				event.venue.id,
+				// event.venue.id,
 			].some((val) => val.trim() === '')
 		) {
 			alert('All information must be fill out.');
@@ -129,15 +133,27 @@ const NewEvent = ({ user }) => {
 							onChange={handleChange}
 						/>
 					</FormField>
-					<FormField>
+					{/* <FormField>
 						<Label htmlFor='venue'>Venue</Label>
 						<select
 							name='venue'
 							value={venues}
-							onChange={handleSelect}
+							onSelect={handleSelect}
 						> {venuesOption}
 						</select>
-					</FormField>
+					</FormField> */}
+					<DropdownButton
+						alignRight
+						title='Venue List'
+						id='dropdown-menu-align-right'
+						onSelect={handleSelect}
+					> 
+						<Dropdown.Item>{venueOption}</Dropdown.Item>
+						<Dropdown.Divider />
+						<Dropdown.Item as={Link} to='/venues/new'>New Venue</Dropdown.Item>
+					</DropdownButton>
+
+					<br />
 					<FormField>
 						<Button color='primary' type='submit'>
 							{isLoading ? 'Loading...' : 'Submit Event'}
@@ -155,7 +171,7 @@ const NewEvent = ({ user }) => {
 				<h5>
 					{event.date} || {event.startTime}
 				</h5>
-				
+
 				<img src={event.imageUrl} alt={event.name} />
 				<p>
 					<cite>By {user.username}</cite>

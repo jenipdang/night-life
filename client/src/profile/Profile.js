@@ -47,7 +47,7 @@ const Profile = ({ user }) => {
 					<ul>
 						{user.created_events?.map((created_event) => (
 							<li key={created_event.id}>
-								<Link style={{textDecoration: 'none', color: 'black'}} to={`/events/${created_event.id}`} className='userShowInfoTitle'>{created_event.name}</Link>
+								<p><Link style={{textDecoration: 'none', color: 'black'}} to={`/events/${created_event.id}`} className='userShowInfoTitle'>{created_event.name}</Link></p>
 							</li>
 						))}
 					</ul>

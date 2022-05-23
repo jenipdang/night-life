@@ -18,13 +18,6 @@ const EventsContainer = () => {
 			.catch((err) => alert(err));
 	}, []);
 
-  // const eventsToDisplay = events.sort((event1, event2) => {
-  //   if (sortBy === "date") {
-  //     return event1.date - event2.date
-  //   } else {
-  //     return event1.name.localeCompare(event2.name)
-  //   } 
-  // })
 
   const searchHandler = (search) => {
     setSearch(search)
@@ -45,11 +38,11 @@ const EventsContainer = () => {
 		<div className='container '>
 			<header className='blog-header py-3'>
 				<div className='row flex-nowrap justify-content-between align-items-center'>
+					<div className='col-4'>
+						<h1>Events</h1>
+						<Search events={events} term={search} searchKeyword={searchHandler}/>
+					</div>
           <div className='col-4 d-flex justify-content-end align-items-center'>
-							<Search events={events} term={search} searchKeyword={searchHandler}/>
-						</div>
-					<div className='col-4 text-center'>
-						<h1 style={{ margin: "20px"}}>Events</h1>
 					</div>
 				</div>
 			</header>

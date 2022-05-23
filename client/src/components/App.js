@@ -12,7 +12,7 @@ import VenueForm from '../venues/VenueForm'
 
 
 function App() {
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState();
 
 	useEffect(() => {
 		fetch('/api/me').then((r) => {

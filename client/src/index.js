@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import { BrowserRouter } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const GlobalStyle = createGlobalStyle`
   *,

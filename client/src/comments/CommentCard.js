@@ -52,7 +52,8 @@ const CommentCard = ({ user, comment }) => {
 						<p>{finalComment.content}</p>
 						{/* {user === finalComment.post_by && location.pathname !== '/comments'? ( */}
 
-					{!isEditing && location.pathname !== "/comments" ? (<div className='actions'>
+					{!isEditing && location.pathname !== "/comments" ? (
+					<div className='actions'>
 						<button onClick={() => setIsEditing((isEditing) => !isEditing)} style={{border: "none", backgroundColor: "white"}}>
 							<span aria-label='edit'>
 							<EditIcon />
@@ -63,7 +64,8 @@ const CommentCard = ({ user, comment }) => {
 							<DeleteIcon />
 							</span>
 						</button>
-					</div>) : null }
+					</div>
+					) : null }
 					</Link>
 				</>
 			) : (

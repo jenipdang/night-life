@@ -28,11 +28,11 @@ before_action :find_event, only: [:show, :update, :destroy]
   def create
     if params[:venue_id]
       venue = Venue.find(params[:venue_id])
-      @event = current_user.events.create!(event_params)
+      @event = current_user.created_events.create!(venue: venue, name: params[:name], image_url: params[:image_url], date: params[:date], start_time: params[:start_time])
       render json: @event, status: :created
     else
-      Venue.create(venue_params)
-      @event = current_user.events.create!(event_params)
+      venue = Venue.create!(venue_params)
+      @event = current_user.created_events.create!(venue: venue, name: params[:name], image_url: params[:image_url], date: params[:date], start_time: params[:start_time])
       render json: @event, status: :created
     end
   end
@@ -58,11 +58,11 @@ before_action :find_event, only: [:show, :update, :destroy]
     end
 
     def venue_params
-      params.permit(:name, :address, :city, :state, :zip_code)
+      params.permit(:name, :address, :city, :state, :zip_code, :user_id)
     end
 
     def event_params
-      params.permit(:name, :image_url, :date, :start_time, :venue)
+      params.permit(:name, :image_url, :date, :start_time, :venue_id)
     end
 
     def check_admin

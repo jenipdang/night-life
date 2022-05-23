@@ -15,20 +15,13 @@ class ApplicationController < ActionController::API
    def authorize
     render json: {errors: ["not authorize"]}, status: :unauthorized unless current_user
    end
-  #  def authorize
-  #   not_found unless current_user
-  #  end
 
    def not_found(exception)
     render json: { errors: ["#{exception.model} not found"]}, status: :not_found
    end
 
-  #  def not_found(exception)
-  #   render json: {errors: ["not authorize"]}, status: :unauthorized unless session.include?(:user_id)
-  #  end
-
-    def not_processed(invalid)
-      render json: { errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
-    end
+  def not_processed(invalid)
+    render json: { errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
+  end
 
 end
