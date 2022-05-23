@@ -14,7 +14,7 @@ function NavBar({ user, setUser }) {
 	return (
 		<Wrapper>
 			<Logo>
-				<Link to='/events'>Night Life</Link>
+				<Link style={{color: 'black'}} to='/events'>Night Life</Link>
 			</Logo>
 			<Nav>
 				<Welcome>
@@ -54,7 +54,7 @@ const Wrapper = styled.header`
 
 const Logo = styled.h1`
 	font-family: 'Tangerine', cursive;
-	font-size: 5.5rem;
+	font-size: 6.5rem;
 	color: black;
 	margin: 0;
 	line-height: 1;

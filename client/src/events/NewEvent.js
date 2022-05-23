@@ -38,7 +38,6 @@ const NewEvent = ({ user }) => {
 	console.log(venueOption)
 
 	const handleSelect = (e) => {
-		console.log(e)
 		setValue(e);
 	};
 
