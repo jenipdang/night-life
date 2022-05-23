@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # get "/comments", to: "comments#index"
   
   namespace :api do
-    resources :users, only: [:show, :update, :destroy]
+    resources :users, only: [:show]
     get "/sort-by-name", to: "events#sort_by_name"
     get "/sort-by-date", to: "events#sort_by_date"
     get "/upcoming-events", to: "events#upcoming_events"
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     
     resources :comments, only: [:index]
   
-    resources :venues, only: [:index]
+    resources :venues, only: [:index, :create]
   
     resources :events do 
       resources :comments, shallow: true

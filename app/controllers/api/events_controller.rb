@@ -42,27 +42,12 @@ before_action :find_event, only: [:show, :update, :destroy]
   def update
     @event&.update!(event_params)
     render json: @event, status: :created
-    # if current_user.events.include?(event)
-    #   event&.update!(event_params)
-    #   render json: event
-    # else
-    #   render_unprocessable_entity_response
-    # end
   end
 
   #delete "/events/:id"
   def destroy
     @event&.destroy
     render json: { message: "Successfully destroyed event!"}
-    # if current_user.events.include?(@event)
-    #   if @event&.destroy
-    #     render json: { message: "Successfully destroyed event"}
-    #   else
-    #     render json: { error: @event.errors.full_messages.to_sentence }
-    #   end
-    # else
-    #   render_unprocessable_entity_response
-    # end
   end
 
 

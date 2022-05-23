@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { Button, Error, FormField, Input} from '../styles';
 
 
-const NewComment = ({eventId}) => {
+const EditComment = ({user, commentObj, handleUpdate}) => {
     const [comment, setComment] = useState({
-      content: ""
+      content: commentObj.content
     })
 
     const [isLoading, setIsLoading] = useState(false);
@@ -19,39 +19,41 @@ const NewComment = ({eventId}) => {
       })
     }
 
+    const updatedComment = {
+        content: comment.content
+    }
+
     const handleSubmit = (e) => {
       e.preventDefault()
       if ([comment.content].some(val => val.trim() === "")) {
         alert("Content cannot be empty!")
       }
 
-      fetch (`/api/events/${eventId}/comments`, {
-        method: 'POST',
+      fetch (`/api/comments/${commentObj.id}`, {
+        method: 'PATCH',
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(comment)
+        body: JSON.stringify(updatedComment)
       })
       .then(r => {
         setIsLoading(false);
         if (r.status === 201) {
           r.json()
-          .then(comment => {
-            setComment({content: comment.content})
-          })
+          .then(data => handleUpdate(data))
         } else {
-					r.json().then((err) => setErrors(err.errors));
-				}
-			})
-			.catch((err) => setErrors(err.message));
-      history.push('/events')
+			r.json().then((err) => setErrors(err.errors));
+		}
+		})
+		.catch((err) => setErrors(err.message));
+        history.push('/events')
     }
     
 
     return (
       <>
         <div>
-          <h2>Add a Comment</h2>
+          <h2>Edit Comment</h2>
           <form>
             <FormField>
               <Input
@@ -77,4 +79,4 @@ const NewComment = ({eventId}) => {
     );
 }
 
-export default NewComment
+export default EditComment

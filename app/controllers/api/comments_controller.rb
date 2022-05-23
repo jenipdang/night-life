@@ -13,7 +13,7 @@ class Api::CommentsController < ApplicationController
     end
 
     def show #get "/comments/:id"
-        render json: serialized_comment
+        render json: @comment
     end
 
     def create #post "/comments" #post "events/:event_id/comments"
@@ -24,7 +24,8 @@ class Api::CommentsController < ApplicationController
 
     def update #patch "/comment/:id"
         if (@comment.commenter == @current_user || @current_user.admin?)
-            render json: serialized_comment
+            @comment&.update!(comment_params)
+            render json: @comment
         else
             render json: {errors: @comment.errors.full_messages.to_sentence}
         end
@@ -42,10 +43,6 @@ class Api::CommentsController < ApplicationController
 
     def find_comment
         @comment = Comment.find(params[:id])
-    end
-
-    def serialized_comment
-        @comment.to_json
     end
 
     def comment_params

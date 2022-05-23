@@ -109,13 +109,6 @@ const EventCard = ({ user, event, setEvents }) => {
 								<br />
 								<hr />
 								<CommentsList comments={comments} />
-								{/* <ul>
-									{finalEvent.comments.map((comment) => (
-										<li key={comment.id}>
-											<h5>{comment.content} || {comment.post_by}</h5>
-										</li>
-									))}
-								</ul> */}
 							</>
 						) : null}
 					</Link>

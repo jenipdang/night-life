@@ -44,7 +44,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 		})
 			.then((r) => {
 				setIsLoading(false);
-				if (r === 201) {
+				if (r.status === 201) {
 					r.json()
 					.then(data => handleUpdate(data))
 				} else {
@@ -58,7 +58,7 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 	return (
 		<Wrapper>
 			<WrapperChild>
-				<h2>Create an Event</h2>
+				<h2>Edit Event</h2>
 				<form onSubmit={handleSubmit}>
 					<FormField>
 						<Label htmlFor='name'>Event Name</Label>
