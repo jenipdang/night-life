@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams, useHistory, useLocation } from 'react-router-dom';
 import Loading from '../pages/Loading';
 import EditComment from './EditComment';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const CommentCard = ({ user, comment }) => {
 	const { commentId } = useParams();
@@ -49,21 +51,19 @@ const CommentCard = ({ user, comment }) => {
 						<h5>|| {finalComment.post_by} || </h5>
 						<p>{finalComment.content}</p>
 						{/* {user === finalComment.post_by && location.pathname !== '/comments'? ( */}
-						{/* {location?.pathname === '/comments' ? 
-							<> */}
-								<button
-									style={{ margin: '5px' }}
-									name='edit'
-									id='edit-btn'
-									onClick={() => setIsEditing((isEditing) => !isEditing)}
-								>
-									Edit
-								</button>
-								<button name='delete' id='delte-btn' onClick={handleDelete}>
-									Delete
-								</button>
-							{/* </>
-						: null} */}
+
+					{!isEditing && location.pathname !== "/comments" ? (<div className='actions'>
+						<button onClick={() => setIsEditing((isEditing) => !isEditing)} style={{border: "none", backgroundColor: "white"}}>
+							<span aria-label='edit'>
+							<EditIcon />
+							</span>
+						</button>
+						<button onClick={handleDelete} style={{border: "none", padding: "20px", backgroundColor: "white"}}>
+							<span aria-label='delete'>
+							<DeleteIcon />
+							</span>
+						</button>
+					</div>) : null }
 					</Link>
 				</>
 			) : (

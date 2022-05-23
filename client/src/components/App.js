@@ -8,6 +8,7 @@ import Profile from '../profile/Profile'
 import EventCard from '../events/EventCard';
 import CommentsList from '../comments/CommentsList';
 import CommentCard from '../comments/CommentCard';
+import VenueForm from '../venues/VenueForm'
 
 
 function App() {
@@ -45,6 +46,9 @@ function App() {
 					</Route>
 					<Route path='/events'>
 						<EventsContainer />
+					</Route>
+					<Route path='/venues/new'>
+						<VenueForm user={user}/>
 					</Route>
 				</Switch>
 			</main>

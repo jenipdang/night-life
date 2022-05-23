@@ -47,7 +47,7 @@ const Profile = ({ user }) => {
 					<ul>
 						{user.created_events?.map((created_event) => (
 							<li key={created_event.id}>
-								<h5 className='userShowInfoTitle'>{created_event.name}</h5>
+								<Link style={{textDecoration: 'none', color: 'black'}} to={`/events/${created_event.id}`} className='userShowInfoTitle'>{created_event.name}</Link>
 							</li>
 						))}
 					</ul>
@@ -59,7 +59,7 @@ const Profile = ({ user }) => {
 					<ul>
 						{user.created_venues?.map((created_venue) => (
 							<li key={created_venue.id}>
-								<h5 className='userShowInfoTitle'>{created_venue.name}</h5>
+								<p className='userShowInfoTitle'>{created_venue.name}</p>
 							</li>
 						))}
 					</ul>

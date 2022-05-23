@@ -5,11 +5,10 @@ class Api::VenuesController < ApplicationController
     
     def index
       render json: Venue.all
-      # render json: Venue.preload(:events).all
     end
   
     def create
-      venue = @current_user.events.create!(venue_params)
+      venue = @current_user.created_venues.create!(venue_params)
       render json: venue, status: :created
     end
   
@@ -20,7 +19,7 @@ class Api::VenuesController < ApplicationController
     end
 
     def venue_params
-      params.permit(:name, :address, :city, :state, :zip_code, :event)
+      params.permit(:name, :address, :city, :state, :zip_code, :event, :user_id)
     end
   
     def check_admin
