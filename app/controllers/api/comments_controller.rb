@@ -23,12 +23,8 @@ class Api::CommentsController < ApplicationController
     end
 
     def update #patch "/comment/:id"
-        # if (@comment.commenter == @current_user || @current_user.admin?)
             @comment&.update!(comment_params)
             render json: @comment
-        # else
-        #     render json: {errors: @comment.errors.full_messages.to_sentence}
-        # end
     end
 
     def destroy #delete "/comment/:id"

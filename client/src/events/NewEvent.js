@@ -132,15 +132,6 @@ const NewEvent = ({ user }) => {
 							onChange={handleChange}
 						/>
 					</FormField>
-					{/* <FormField>
-						<Label htmlFor='venue'>Venue</Label>
-						<select
-							name='venue'
-							value={venues}
-							onSelect={handleSelect}
-						> {venuesOption}
-						</select>
-					</FormField> */}
 					<DropdownButton
 						alignRight
 						title='Venue List'

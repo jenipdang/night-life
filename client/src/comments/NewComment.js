@@ -50,7 +50,7 @@ const NewComment = ({eventId}) => {
 
     return (
       <>
-        <div>
+        <div style={{justifyContent: "center"}}>
           <h2>Add a Comment</h2>
           <form>
             <FormField>

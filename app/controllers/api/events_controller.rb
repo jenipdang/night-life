@@ -5,7 +5,6 @@ before_action :check_admin, except: [:index, :show, :upcoming_events]
 before_action :find_event, only: [:show, :update, :destroy]
   
   def index
-    # render json: Event.all
     render json: Event.preload(:venue).all
   end
 

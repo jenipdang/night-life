@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { Button, Error, FormField, Input} from '../styles';
 
 
-const EditComment = ({user, commentObj, handleUpdate}) => {
+const EditComment = ({commentObj, handleUpdate}) => {
     const [comment, setComment] = useState({
       content: commentObj.content
     })

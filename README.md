@@ -1,12 +1,28 @@
 # Night Life: Rails and React App
 
-This app uses a Rails API and React frontend that can be deployed to a single
-domain. For ease of deployment, both projects are contained in the same
-repository. All React code is in the `/client` directory during development.
+## Description
+Night Life, an app made for night owls. With Night Life, night owls can check out events that happen after sunset. Promoters can come together to one place and promote the venue(s) and event(s). 
 
-When the application is deployed, the production version of the React application
-will be generated on the server and placed in the `public` directory of the Rails
-application, where we can use Rails to serve it.
+### User (all)
+- Sign up to be a member to access Night Life
+- Sign in to the app with their username and password
+- View all events in the system 
+- View all comments for an event
+- Add a new comment to an event
+
+### User (Role: Guest) 
+- Edit/Delete comments that belongs them
+- Profile display user infromation and activities 
+
+### Promoter (Role: Admin)
+- Edit/Delete any posted comments 
+- Edit/Delete posted events
+- Add new venue to the system
+- Profile display admin user information and activites
+
+
+This applicaiton was using Rails API, React frontend, React Bootstrap, Material UI, and Styled Components.
+
 
 ## Setup
 
@@ -75,131 +91,30 @@ Deploy:
 git push heroku main
 ```
 
-## Code Explanations
+## Admin Account Information to test the App
+- Username: jenidang
+- Password: 1234567jd
 
-There are a few areas of the code that differ from the typical Rails API
-setup that merit explanation.
+## Reflection
 
-### Cookies/Sessions Setup
+Project goals included 
+- buidling an app using a Rails API backend with a React frontend using Flatiron project demo file
+- apply knowledge of Active Record Associations, Active Model Serilizer, Rails file structure, nested resource routing, custom rendering, cookies and sessions, and implement authorization/authentication including password protection.
+- incorporate at least 3 different client-side routes using React Router with Navigation bar to allow using to navigate between routes 
+- add styling using CSS, styled-components and incorporate some UI framework
 
-By default, when generating a new Rails app in API mode, the middleware for
-cookies and sessions isn't included. We can add it back in (and specify the
-`SameSite` policy for our cookies for protection):
-
-```rb
-# config/application.rb
-
-# Adding back cookies and session middleware
-config.middleware.use ActionDispatch::Cookies
-config.middleware.use ActionDispatch::Session::CookieStore
-
-# Use SameSite=Strict for all cookies to help protect against CSRF
-config.action_dispatch.cookies_same_site_protection = :strict
-```
-
-We also need to include helpers for sessions/cookies in our controllers:
-
-```rb
-# app/controllers/application_controller.rb
-
-class ApplicationController < ActionController::API
-  include ActionController::Cookies
-end
-```
-
-Now, we can set a session cookie for users when they log in:
-
-```rb
-def create
-  user = User.find_by(username: params[:username]).authenticate(params[:password])
-  session[:user_id] = user.id
-  render json: user
-end
-```
-
-### Deploying Setup Explained
-
-We'll deploy our frontend and backend to Heroku on one single app. There are a
-couple key pieces to this configuration. First, the [`Procfile`][`procfile`]:
-
-```txt
-web: bundle exec rails s
-release: bin/rake db:migrate
-```
-
-This gives Heroku instructions on commands to run on **release** (run our
-migrations), and **web** (run rails server).
-
-Second, the `package.json` file in the **root** directory (not the one in the
-**client** directory):
-
-```json
-{
-  "name": "phase-4-deploying-app-demo",
-  "description": "Build scripts for Heroku",
-  "engines": {
-    "node": "16.x"
-  },
-  "scripts": {
-    "build": "npm install --prefix client && npm run build --prefix client",
-    "clean": "rm -rf public",
-    "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
-  }
-}
-```
-
-The [`heroku-postbuild`][`heroku-postbuild`] script will run when our app has
-been deployed. This will build the production version of our React app. It does
-the following:
-
-- removes any old versions of the React code by deleting the `public` directory
-- installs the frontend dependencies with `npm install`
-- builds a production version of the React application with `npm build` in the
-  `client/build` directory
-- copies the built version of the React code into the `public` directory
-
-When a request comes to our server, we can decide if it's request for an API
-resource, or a request to view the React application. If it's an API request, we
-can send back JSON data from the controller. Otherwise, we can send back the
-`index.html` file from our `public` directory and run the React application.
-
-### React Router
-
-For our deployed app, we need non-API requests to pass through to our React
-application. Otherwise, routes that would normally be handled by React Router
-will be handled by Rails instead.
-
-Setup routes fallback (make sure this is the last route defined in the
-`routes.rb` file):
-
-```rb
-# config/routes.rb
-get '*path', to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
-```
-
-Add controller action:
-
-```rb
-class FallbackController < ActionController::Base
-
-  def index
-    render file: 'public/index.html'
-  end
-end
-```
-
-Note: this controller must inherit from `ActionController::Base` instead of
-`ApplicationController`, since `ApplicationController` inherits from
-`ActionController::API`. API controllers can't render HTML. Plus, we don't need
-any of the auth logic in this controller.
+A few chanlleges that I face while building Night Life: 
+- Adding a drop-down selection showing a list of available venue and link connecting to the venue form to create a new venue if the venue is not on the list was not as simple as I thought it would be. After hours of troubleshooting and an extra pair of eyes, it was me, I double assigned the value.  
 
 
-[`samesite` explained]: https://web.dev/samesite-cookies-explained/
-[`samesite` owasp]: https://owasp.org/www-community/SameSite
-[`samesite` and csrf]: https://security.stackexchange.com/questions/121971/will-same-site-cookies-be-sufficent-protection-against-csrf-and-xss
-[`foreman`]: https://github.com/ddollar/foreman
-[create-react-app proxy]: https://create-react-app.dev/docs/proxying-api-requests-in-development/
-[buildpacks]: https://devcenter.heroku.com/articles/using-multiple-buildpacks-for-an-app
-[`procfile`]: https://devcenter.heroku.com/articles/procfile
-[`heroku-postbuild`]: https://devcenter.heroku.com/articles/nodejs-support#customizing-the-build-process
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate
+
+## Resources 
+Project Deploying Demo App - https://github.com/learn-co-curriculum/phase-4-deploying-demo-app
+Pluralsight - https://www.pluralsight.com/guides/how-to-capture-the-value-of-dropdown-lists-with-react-bootstrap
+Flatiron Cohart 09/20 Instrutor: Matteo Piccini
+Material UI - https://mui.com/
+React Bootstrap - https://react-bootstrap.github.io/

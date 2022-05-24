@@ -47,12 +47,12 @@ const EditEvent = ({ user, eventObj, handleUpdate }) => {
 				if (r.status === 201) {
 					r.json()
 					.then(data => handleUpdate(data))
+					history.push('/events')
 				} else {
 					r.json().then((err) => setErrors(err.errors));
 				}
 			})
 			.catch((err) => setErrors(err.message));
-			history.push('/events')
 	};
 
 	return (
