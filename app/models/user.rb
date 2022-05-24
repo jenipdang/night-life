@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :created_events, foreign_key: :user_id, class_name: "Event", dependent: :destroy
   has_many :created_venues, foreign_key: :user_id, class_name: "Venue", dependent: :destroy
   has_many :comments
+  has_many :commented_events, through: :comments, source: :event
  
   attr_accessor :old_password
   

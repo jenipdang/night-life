@@ -12,4 +12,8 @@ class Comment < ApplicationRecord
     end
   end
 
+  # def total_commenters
+  #   Event.commenters.length
+  # end
+
 end

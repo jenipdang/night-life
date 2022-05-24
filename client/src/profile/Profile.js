@@ -6,6 +6,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 
 const Profile = ({ user }) => {
+
 	return (
 		<>
 			<div className='user'>
@@ -72,7 +73,7 @@ const Profile = ({ user }) => {
 					</div>
 				) : null}
 				<div className='userShow'>
-					<span className='userShowTitle'>Comments History</span>
+					<span className='userShowTitle'>Comments History || Total Commented Events: {user.comments.length}</span>
 					<ul>
 						{user.comments?.map((comment) => (
 							<li key={comment.id}>
@@ -81,7 +82,7 @@ const Profile = ({ user }) => {
 									to={`/comments/${comment.id}`}
 									className='userShowInfoTitle'
 								>
-									{comment.content}
+									{comment.content} || {comment.event_name}
 								</Link>
 							</li>
 						))}

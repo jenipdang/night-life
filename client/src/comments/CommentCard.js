@@ -50,7 +50,7 @@ const CommentCard = ({ user, comment }) => {
 					>
 						<h5>|| {finalComment.post_by} || </h5>
 						<p>{finalComment.content}</p>
-					{(!isEditing && location.pathname.includes("/comments")) && (user.username === finalComment.post_by)? (
+					{(!isEditing && location.pathname.includes("/comments")) && (user.username === finalComment.post_by || user?.role === "admin") ? (
 					<div className='actions'>
 						<button onClick={() => setIsEditing((isEditing) => !isEditing)} style={{border: "none", backgroundColor: "white"}}>
 							<span aria-label='edit'>

@@ -8,12 +8,17 @@ before_action :find_event, only: [:show, :update, :destroy]
     render json: Event.preload(:venue).all
   end
 
-  def sort_by_name
-    render json: Event.sort_by_name
-  end
+  ## Wishlist to work on later ##
+  # def sort_by_name
+  #   render json: Event.sort_by_name
+  # end
 
-  def sort_by_date
-    render json: Event.sort_by_date
+  # def sort_by_date
+  #   render json: Event.sort_by_date
+  # end
+
+  def past_events
+    render json: Event.past_events
   end
 
   def upcoming_events

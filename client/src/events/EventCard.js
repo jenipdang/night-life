@@ -107,6 +107,7 @@ const EventCard = ({ user, event, setEvents }) => {
 									addNewComment={addNewComment}
 								/>
 								<br />
+								<ListGroupItem style={{textTransform: 'uppercase'}}>Total Commenters: {finalEvent.total_commenters} </ListGroupItem>
 								<hr />
 								<CommentsList comments={comments} />
 							</>
