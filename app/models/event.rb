@@ -26,7 +26,7 @@ class Event < ApplicationRecord
   # end
 
   def total_commenters
-    self.commenters.length
+    self.commenters.uniq.length
   end
   
 end
