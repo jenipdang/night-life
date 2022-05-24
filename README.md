@@ -113,8 +113,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate
 
 ## Resources 
-Project Deploying Demo App - https://github.com/learn-co-curriculum/phase-4-deploying-demo-app
-Pluralsight - https://www.pluralsight.com/guides/how-to-capture-the-value-of-dropdown-lists-with-react-bootstrap
-Flatiron Cohart 09/20 Instrutor: Matteo Piccini
-Material UI - https://mui.com/
-React Bootstrap - https://react-bootstrap.github.io/
+- Project Deploying Demo App - https://github.com/learn-co-curriculum/phase-4-deploying-demo-app
+- Pluralsight - https://www.pluralsight.com/guides/how-to-capture-the-value-of-dropdown-lists-with-react-bootstrap
+- Flatiron Cohart 09/20 Instrutor: Matteo Piccini
+- Material UI - https://mui.com/
+- React Bootstrap - https://react-bootstrap.github.io/
