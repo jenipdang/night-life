@@ -68,7 +68,6 @@ const EventCard = ({ user, event, setEvents }) => {
 							src={finalEvent.image_url}
 							alt={finalEvent.name}
 						/>
-
 						<ListGroup style={{textAlign: "left"}} className='list-group-flush'>
 							<br />
 							<ListGroupItem>Date: <em>{finalEvent.date ? dateformat(finalEvent.date, 'dddd, mmmm dS yyyy') : ""}</em></ListGroupItem>
@@ -94,11 +93,12 @@ const EventCard = ({ user, event, setEvents }) => {
 							<>
 							{location.pathname !== "/events" ? <>
 							<button style={{margin: '5px'}} name='edit' id="edit-btn" onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit</button>
-							<button name='delete' id="delte-btn" onClick={handleDelete}>Delete</button> 
+							<button name='delete' id="delete-btn" onClick={handleDelete}>Delete</button> 
 							</> :null} </>
 							: null }
 							
 						</ListGroup>
+						</Link>
 						{location.pathname !== '/events' ? (
 							<>
 							<br />
@@ -111,7 +111,7 @@ const EventCard = ({ user, event, setEvents }) => {
 								<CommentsList comments={comments} />
 							</>
 						) : null}
-					</Link>
+			
 					</>) : (<EditEvent user={user} id={eventId} eventObj={finalEvent} handleUpdate={handleUpdate} />)}
 				</Card>
 			</div>

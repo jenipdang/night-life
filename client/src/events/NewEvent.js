@@ -30,9 +30,9 @@ const NewEvent = ({ user }) => {
 
 
 	const venueOption = venues?.map((venue) => (
-		<Dropdown.Item eventKey={venue.id} value={venue}>
+		[<Dropdown.Item key={venue.id} eventKey={venue.id} value={venue}>
 			{venue.name}
-		</Dropdown.Item>
+		</Dropdown.Item>]
 	));
 
 	console.log(venueOption)
@@ -53,7 +53,7 @@ const NewEvent = ({ user }) => {
 		date: event.date,
 		start_time: event.startTime,
 		image_url: event.imageUrl,
-		venue_id: value.id,
+		venue_id: value,
 		user_id: user.id,
 	};
 
@@ -82,7 +82,7 @@ const NewEvent = ({ user }) => {
 		})
 			.then((r) => {
 				setIsLoading(false);
-				if (r === 201) {
+				if (r.status === 201) {
 					history.push('/events');
 				} else {
 					r.json().then((err) => setErrors(err.errors));
@@ -147,7 +147,7 @@ const NewEvent = ({ user }) => {
 						id='dropdown-menu-align-right'
 						onSelect={handleSelect}
 					> 
-						<Dropdown.Item>{venueOption}</Dropdown.Item>
+						{venueOption}
 						<Dropdown.Divider />
 						<Dropdown.Item as={Link} to='/venues/new'>New Venue</Dropdown.Item>
 					</DropdownButton>

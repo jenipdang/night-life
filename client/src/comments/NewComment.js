@@ -38,13 +38,13 @@ const NewComment = ({eventId}) => {
           r.json()
           .then(comment => {
             setComment({content: comment.content})
+            history.push('/events')
           })
         } else {
 					r.json().then((err) => setErrors(err.errors));
 				}
 			})
 			.catch((err) => setErrors(err.message));
-      history.push('/events')
     }
     
 

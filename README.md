@@ -1,4 +1,4 @@
-# Rails and React Heroku Demo App
+# Night Life: Rails and React App
 
 This app uses a Rails API and React frontend that can be deployed to a single
 domain. For ease of deployment, both projects are contained in the same
@@ -193,6 +193,7 @@ Note: this controller must inherit from `ActionController::Base` instead of
 `ApplicationController`, since `ApplicationController` inherits from
 `ActionController::API`. API controllers can't render HTML. Plus, we don't need
 any of the auth logic in this controller.
+
 
 [`samesite` explained]: https://web.dev/samesite-cookies-explained/
 [`samesite` owasp]: https://owasp.org/www-community/SameSite
