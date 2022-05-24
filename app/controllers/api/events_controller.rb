@@ -17,13 +17,13 @@ before_action :find_event, only: [:show, :update, :destroy]
   #   render json: Event.sort_by_date
   # end
 
-  def past_events
-    render json: Event.past_events
-  end
+  # def past_events
+  #   render json: Event.past_events
+  # end
 
-  def upcoming_events
-    render json: Event.upcoming_events
-  end
+  # def upcoming_events
+  #   render json: Event.upcoming_events
+  # end
 
   def show
     render json: @event
