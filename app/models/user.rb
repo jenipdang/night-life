@@ -17,4 +17,8 @@ class User < ApplicationRecord
   end
 
 
+  def total_commented_events
+    self.commented_events.uniq.length
+  end
+
 end

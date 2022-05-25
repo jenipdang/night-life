@@ -73,7 +73,7 @@ const Profile = ({ user }) => {
 					</div>
 				) : null}
 				<div className='userShow'>
-					<span className='userShowTitle'>Comments History || Total Commented Events: {user.comments.length}</span>
+					<span className='userShowTitle'>Comments History || Total Commented Events: {user.total_commented_events}</span>
 					<ul>
 						{user.comments?.map((comment) => (
 							<li key={comment.id}>
