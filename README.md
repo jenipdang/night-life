@@ -15,6 +15,8 @@ Night Life, an app made for night owls. With Night Life, night owls can check ou
 - Profile display user infromation and activities 
 
 ### Promoter (Role: Admin)
+- Create an Event
+- Create a new Venue for a new event if Venue does not already exisit
 - Edit/Delete any posted comments 
 - Edit/Delete posted events
 - Add new venue to the system
