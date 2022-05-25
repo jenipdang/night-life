@@ -8,6 +8,7 @@ class Event < ApplicationRecord
   validates :name, :date, :start_time, presence: true
   before_save :format_name
 
+  ## wishlist - will work on later
   # scope :most_comments, -> {self.joins(:comments).group(:event_id).order("COUNT(events.id) DESC").limit(1)}
   # scope :sort_by_name, -> {self.order(name: :asc)}
   # scope :sort_by_date, -> {self.order(date: :asc)}
