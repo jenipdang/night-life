@@ -8,7 +8,7 @@ import NewComment from '../comments/NewComment';
 import dateformat from 'dateformat'
 import CommentsList from '../comments/CommentsList';
 
-const EventCard = ({ user, event, setEvents }) => {
+const EventCard = ({ user, event }) => {
 	const [eventObj, setEventObj] = useState(null);
 	const [comments, setComments] = useState([]);
 	const { eventId } = useParams();

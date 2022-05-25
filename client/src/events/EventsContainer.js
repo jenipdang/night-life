@@ -46,7 +46,7 @@ const EventsContainer = () => {
 					</div>
 				</div>
 			</header>
-			<EventsList setEvents={setEvents} events={search.length < 1 ? events : searchResult} />
+			<EventsList events={search.length < 1 ? events : searchResult} />
 		</div>
 	);
 };
