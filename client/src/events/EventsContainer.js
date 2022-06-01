@@ -3,7 +3,7 @@ import EventsList from './EventsList';
 import Search from './Search';
 
 const EventsContainer = () => {
-	const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]);
   const [search, setSearch] = useState('')
   const [searchResult, setSearchResult] = useState([])
 
