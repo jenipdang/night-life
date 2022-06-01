@@ -26,6 +26,7 @@ class Event < ApplicationRecord
   #   self.all.where("date > ?", DateTime.now)
   # end
 
+
   def total_commenters
     self.commenters.uniq.length
   end

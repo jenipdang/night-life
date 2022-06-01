@@ -16,6 +16,9 @@ class User < ApplicationRecord
     self.created_events.order(created_at: 'desc')
   end
 
+  def sort_event
+    self.created_events.order(name: 'asc')
+  end
 
   def total_commented_events
     self.commented_events.uniq.length

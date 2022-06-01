@@ -4,8 +4,10 @@ import './profile.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import { useState } from 'react'
 
 const Profile = ({ user }) => {
+	const [showSort, setShowSort] = useState(false)
 
 	return (
 		<>
@@ -42,9 +44,9 @@ const Profile = ({ user }) => {
 			<div className='user'>
 				{user.role === 'admin' ? (
 					<div className='userShow'>
-						<span className='userShowTitle'>Posted Events</span>
+						<span className='userShowTitle' onClick={() => setShowSort(true)}>Posted Events</span>
 						<ul>
-							{user.created_events?.map((created_event) => (
+							{!showSort ? <> {user.created_events?.map((created_event) => (
 								<li key={created_event.id}>
 									<p>
 										<Link
@@ -57,6 +59,21 @@ const Profile = ({ user }) => {
 									</p>
 								</li>
 							))}
+							</> : <>
+							{user.sort_event?.map((event_sorted) => (
+								<li key={event_sorted.id}>
+									<p>
+										<Link
+											style={{ textDecoration: 'none', color: 'black' }}
+											to={`/events/${event_sorted.id}`}
+											className='userShowInfoTitle'
+										>
+											{event_sorted.name}
+										</Link>
+									</p>
+								</li>
+							))}
+							</>}
 						</ul>
 					</div>
 				) : null}
