@@ -20,6 +20,14 @@ class User < ApplicationRecord
     self.created_events.order(name: 'asc')
   end
 
+  def sort_venue
+    self.created_venues.order(name: 'asc')
+  end
+
+  # def sort_by_asc
+  #   self.created_events.sort_by{|event| event.name} 
+  # end
+
   def total_commented_events
     self.commented_events.uniq.length
   end

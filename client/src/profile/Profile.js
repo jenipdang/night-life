@@ -7,7 +7,8 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import { useState } from 'react'
 
 const Profile = ({ user }) => {
-	const [showSort, setShowSort] = useState(false)
+	const [sortEvent, setSortEvent] = useState(false)
+	const [sortVenue, setSortVenue] = useState(false)
 
 	return (
 		<>
@@ -44,9 +45,10 @@ const Profile = ({ user }) => {
 			<div className='user'>
 				{user.role === 'admin' ? (
 					<div className='userShow'>
-						<span className='userShowTitle' onClick={() => setShowSort(true)}>Posted Events</span>
+						<span className='userShowTitle'>Posted Events</span>
+						<button className='btn btn-outline-secondary d-grid' onClick={() => setSortEvent((bool) => !bool)}>{!sortEvent ? "Sort A-Z" : "Unsort"}</button>
 						<ul>
-							{!showSort ? <> {user.created_events?.map((created_event) => (
+							{!sortEvent ? <> {user.created_events?.map((created_event) => (
 								<li key={created_event.id}>
 									<p>
 										<Link
@@ -79,13 +81,22 @@ const Profile = ({ user }) => {
 				) : null}
 				{user.role === 'admin' ? (
 					<div className='userShow'>
-						<span className='userShowTitle'>Posted Venues</span>
+						<span className='userShowTitle' >Posted Venues</span>
+						<button className='btn btn-outline-secondary d-grid' onClick={() => setSortVenue((bool) => !bool)}>{!sortVenue ? "Sort A-Z" : "Unsort"}</button>
 						<ul>
-							{user.created_venues?.map((created_venue) => (
+							{!sortVenue ? 
+							<>{user.created_venues?.map((created_venue) => (
 								<li key={created_venue.id}>
 									<p className='userShowInfoTitle'>{created_venue.name}</p>
 								</li>
-							))}
+							))}</>
+							: 
+							<>{user.sort_venue?.map((venue_sort) => (
+								<li key={venue_sort.id}>
+									<p className='userShowInfoTitle'>{venue_sort.name}</p>
+								</li>
+							))}</>
+							}
 						</ul>
 					</div>
 				) : null}
