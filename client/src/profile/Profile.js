@@ -4,11 +4,11 @@ import './profile.css';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import { useState } from 'react'
+import { useState } from 'react';
 
 const Profile = ({ user }) => {
-	const [sortEvent, setSortEvent] = useState(false)
-	const [sortVenue, setSortVenue] = useState(false)
+	const [sortEvent, setSortEvent] = useState(false);
+	const [sortVenue, setSortVenue] = useState(false);
 
 	return (
 		<>
@@ -46,62 +46,85 @@ const Profile = ({ user }) => {
 				{user.role === 'admin' ? (
 					<div className='userShow'>
 						<span className='userShowTitle'>Posted Events</span>
-						<button className='btn btn-outline-secondary d-grid' onClick={() => setSortEvent((bool) => !bool)}>{!sortEvent ? "Sort A-Z" : "Unsort"}</button>
+						<button
+							className='btn btn-outline-secondary d-grid'
+							onClick={() => setSortEvent((bool) => !bool)}
+						>
+							{!sortEvent ? 'Sort A-Z' : 'Unsort'}
+						</button>
 						<ul>
-							{!sortEvent ? <> {user.created_events?.map((created_event) => (
-								<li key={created_event.id}>
-									<p>
-										<Link
-											style={{ textDecoration: 'none', color: 'black' }}
-											to={`/events/${created_event.id}`}
-											className='userShowInfoTitle'
-										>
-											{created_event.name}
-										</Link>
-									</p>
-								</li>
-							))}
-							</> : <>
-							{user.sort_event?.map((event_sorted) => (
-								<li key={event_sorted.id}>
-									<p>
-										<Link
-											style={{ textDecoration: 'none', color: 'black' }}
-											to={`/events/${event_sorted.id}`}
-											className='userShowInfoTitle'
-										>
-											{event_sorted.name}
-										</Link>
-									</p>
-								</li>
-							))}
-							</>}
+							{!sortEvent ? (
+								<>
+									{' '}
+									{user.created_events?.map((created_event) => (
+										<li key={created_event.id}>
+											<p>
+												<Link
+													style={{ textDecoration: 'none', color: 'black' }}
+													to={`/events/${created_event.id}`}
+													className='userShowInfoTitle'
+												>
+													{created_event.name}
+												</Link>
+											</p>
+										</li>
+									))}
+								</>
+							) : (
+								<>
+									{user.sort_event?.map((event_sorted) => (
+										<li key={event_sorted.id}>
+											<p>
+												<Link
+													style={{ textDecoration: 'none', color: 'black' }}
+													to={`/events/${event_sorted.id}`}
+													className='userShowInfoTitle'
+												>
+													{event_sorted.name}
+												</Link>
+											</p>
+										</li>
+									))}
+								</>
+							)}
 						</ul>
 					</div>
 				) : null}
 				{user.role === 'admin' ? (
 					<div className='userShow'>
-						<span className='userShowTitle' >Posted Venues</span>
-						<button className='btn btn-outline-secondary d-grid' onClick={() => setSortVenue((bool) => !bool)}>{!sortVenue ? "Sort A-Z" : "Unsort"}</button>
+						<span className='userShowTitle'>Posted Venues</span>
+						<button
+							className='btn btn-outline-secondary d-grid'
+							onClick={() => setSortVenue((bool) => !bool)}
+						>
+							{!sortVenue ? 'Sort A-Z' : 'Unsort'}
+						</button>
 						<ul>
-							{!sortVenue ? 
-							<>{user.created_venues?.map((created_venue) => (
-								<li key={created_venue.id}>
-									<p className='userShowInfoTitle'>{created_venue.name}</p>
-								</li>
-							))}</>
-							: 
-							<>{user.sort_venue?.map((venue_sort) => (
-								<li key={venue_sort.id}>
-									<p className='userShowInfoTitle'>{venue_sort.name}</p>
-								</li>
-							))}</>
-							}
+							{!sortVenue ? (
+								<>
+									{user.created_venues?.map((created_venue) => (
+										<li key={created_venue.id}>
+											<p className='userShowInfoTitle'>{created_venue.name}</p>
+										</li>
+									))}
+								</>
+							) : (
+								<>
+									{user.sort_venue?.map((venue_sort) => (
+										<li key={venue_sort.id}>
+											<p className='userShowInfoTitle'>{venue_sort.name}</p>
+										</li>
+									))}
+								</>
+							)}
 						</ul>
 					</div>
 				) : null}
 				<div className='userShow'>
-					<span className='userShowTitle'>Comments History || Total Commented Events: {user.total_commented_events}</span>
+					<span className='userShowTitle'>
+						Comments History || Total Commented Events:{' '}
+						{user.total_commented_events}
+					</span>
 					<ul>
 						{user.comments?.map((comment) => (
 							<li key={comment.id}>
@@ -110,7 +133,10 @@ const Profile = ({ user }) => {
 									to={`/comments/${comment.id}`}
 									className='userShowInfoTitle'
 								>
-									{comment.content} || {comment.event_name}
+									{comment.content} || {comment.event_name} ||{' '}
+									{comment.created_at
+										? dateformat(user.created_at, 'dddd, mmmm dS yyyy')
+										: ''}
 								</Link>
 							</li>
 						))}

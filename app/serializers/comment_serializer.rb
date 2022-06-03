@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :content, :post_by , :event_name
+  attributes :id, :content, :post_by , :event_name, :created_at
   belongs_to :event
 
   def post_by
@@ -9,6 +9,5 @@ class CommentSerializer < ActiveModel::Serializer
   def event_name
     "#{self.object.event.name}"
   end
-
 
 end
