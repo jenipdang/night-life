@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../styles';
-import { useState } from 'react'
 
 function NavBar({ user, setUser }) {
 	const location = useLocation();
@@ -62,7 +61,8 @@ const Logo = styled.h1`
 	font-size: 6.5rem;
 	color: black;
 	line-height: 1;
-	margin: 50px;
+	margin: 0;
+	display: felx;
 	text-shadow: 4px 4px 4px #aaa a {
 		color: inherit;
 		text-decoration: none;

@@ -90,6 +90,8 @@ const Profile = ({ user }) => {
 						</ul>
 					</div>
 				) : null}
+				</div>
+				<div className='user'>
 				{user.role === 'admin' ? (
 					<div className='userShow'>
 						<span className='userShowTitle'>Posted Venues</span>
@@ -120,6 +122,8 @@ const Profile = ({ user }) => {
 						</ul>
 					</div>
 				) : null}
+				</div>
+				<div className='user'>
 				<div className='userShow'>
 					<span className='userShowTitle'>
 						Comments History || Total Commented Events:{' '}
