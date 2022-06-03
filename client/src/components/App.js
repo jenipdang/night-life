@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import Login from '../pages/Login';
 import NewEvent from '../events/NewEvent'
 import EventsContainer from '../events/EventsContainer';
+import UpcomingEventsContainer from '../events/UpcomingEventsContainer';
 import Profile from '../profile/Profile'
 import EventCard from '../events/EventCard';
 import CommentsList from '../comments/CommentsList';
@@ -43,6 +44,9 @@ function App() {
 					</Route> 
 					<Route path='/events/:eventId'>
 						<EventCard user={user}/>
+					</Route>
+					<Route path='/upcoming-events'>
+						<UpcomingEventsContainer />
 					</Route>
 					<Route path='/events'>
 						<EventsContainer />

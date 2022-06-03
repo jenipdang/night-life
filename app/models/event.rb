@@ -12,7 +12,7 @@ class Event < ApplicationRecord
   # scope :most_comments, -> {self.joins(:comments).group(:event_id).order("COUNT(events.id) DESC").limit(1)}
   # scope :sort_by_name, -> {self.order(name: :asc)}
   # scope :sort_by_date, -> {self.order(date: :asc)}
-  # scope :upcoming_events, -> {self.all.where("date > ?", DateTime.now)}
+  scope :upcoming_events, -> {self.all.where("date > ?", DateTime.now)}
   # scope :past_events, -> {self.all - self.upcoming_events}
 
   def format_name

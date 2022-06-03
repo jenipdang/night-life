@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../styles';
+import { useState } from 'react'
 
 function NavBar({ user, setUser }) {
+	const location = useLocation();
+
 	function handleLogoutClick() {
 		fetch('/api/logout', { method: 'DELETE' }).then((r) => {
 			if (r.ok) {
@@ -20,7 +23,10 @@ function NavBar({ user, setUser }) {
 				<Welcome>
 					Welcome: <Link to='/profile'>{user.username}</Link>
 				</Welcome>
-
+				{location.pathname !== "/upcoming-events" ? 
+				<><Button as={Link} to='/upcoming-events'>
+						Upcoming Events
+				</Button></> : null }
 				{user.role === 'admin' ? (
 					<>
 						<Button as={Link} to='/events/new'>
@@ -31,7 +37,6 @@ function NavBar({ user, setUser }) {
 						</Button>
 					</>
 				) : null}
-
 				<Button variant='outline' onClick={handleLogoutClick}>
 					Logout
 				</Button>
@@ -56,8 +61,8 @@ const Logo = styled.h1`
 	font-family: 'Tangerine', cursive;
 	font-size: 6.5rem;
 	color: black;
-	margin: 0;
 	line-height: 1;
+	margin: 50px;
 	text-shadow: 4px 4px 4px #aaa a {
 		color: inherit;
 		text-decoration: none;

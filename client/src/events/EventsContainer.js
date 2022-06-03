@@ -7,7 +7,6 @@ const EventsContainer = () => {
   const [search, setSearch] = useState('')
   const [searchResult, setSearchResult] = useState([])
 
-
 	useEffect(() => {
 		fetch('/api/events')
 			.then((r) => r.json())
@@ -41,8 +40,6 @@ const EventsContainer = () => {
 					<div className='col-4'>
 						<h1>Events</h1>
 						<Search events={events} term={search} searchKeyword={searchHandler}/>
-					</div>
-          <div className='col-4 d-flex justify-content-end align-items-center'>
 					</div>
 				</div>
 			</header>
