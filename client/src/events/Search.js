@@ -7,7 +7,6 @@ function Search({ setEvents }) {
   const ref = useRef()
 
   const getSearchTerm = () => {
-    // setTerm(ref.current.value)
     fetch(`/api/search?name=${term}`)
     .then((r) => r.json())
     .then((data) => {
