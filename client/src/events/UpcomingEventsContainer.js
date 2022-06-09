@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react'
 import UpcomingEventsList from '../events/UpcomingEventsList'
-import Search from './Search';
 
 const UpcomingEventsContainer = () => {
     const [futureEvents, setFutureEvents] = useState([])

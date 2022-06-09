@@ -21,6 +21,10 @@ before_action :find_event, only: [:show, :update, :destroy]
   #   render json: Event.past_events
   # end
 
+  def search
+    render json: Event.search_event(params[:name])
+  end
+
   def upcoming_events
     render json: Event.upcoming_events
   end

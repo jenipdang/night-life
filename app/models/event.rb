@@ -21,10 +21,13 @@ class Event < ApplicationRecord
     end
   end
 
-  # #shows all upcoming events 
-  # def self.upcoming_events
-  #   self.all.where("date > ?", DateTime.now)
-  # end
+  def self.search_event(search_for)
+    if (!search_for.empty?)
+    self.all.where("name like ?", "%#{search_for.titleize}%")
+    else
+      self.all
+    end
+  end
 
 
   def total_commenters

@@ -25,7 +25,7 @@ const NewEvent = ({ user }) => {
 		fetch('/api/venues')
 			.then((r) => r.json())
 			.then((data) => setVenues(data))
-			.catch((err) => alert(err));
+			.catch((err) => setErrors(err.errors));
 	}, []);
 
 
