@@ -8,19 +8,6 @@ before_action :find_event, only: [:show, :update, :destroy]
     render json: Event.preload(:venue).all
   end
 
-  ## Wishlist to work on later ##
-  # def sort_by_name
-  #   render json: Event.sort_by_name
-  # end
-
-  # def sort_by_date
-  #   render json: Event.sort_by_date
-  # end
-
-  # def past_events
-  #   render json: Event.past_events
-  # end
-
   def search
     render json: Event.search_event(params[:name])
   end
@@ -45,14 +32,11 @@ before_action :find_event, only: [:show, :update, :destroy]
     end
   end
 
-
-  #patch "/events/:id"
   def update
     @event&.update!(event_params)
     render json: @event, status: :created
   end
 
-  #delete "/events/:id"
   def destroy
     @event&.destroy
     render json: { message: "Successfully destroyed event!"}

@@ -8,12 +8,7 @@ class Event < ApplicationRecord
   validates :name, :date, :start_time, presence: true
   before_save :format_name
 
-  ## wishlist - will work on later
-  # scope :most_comments, -> {self.joins(:comments).group(:event_id).order("COUNT(events.id) DESC").limit(1)}
-  # scope :sort_by_name, -> {self.order(name: :asc)}
-  # scope :sort_by_date, -> {self.order(date: :asc)}
   scope :upcoming_events, -> {self.all.where("date > ?", DateTime.now)}
-  # scope :past_events, -> {self.all - self.upcoming_events}
 
   def format_name
     if self.name[0] != self.name[0].upcase
@@ -23,7 +18,7 @@ class Event < ApplicationRecord
 
   def self.search_event(search_for)
     if (!search_for.empty?)
-    self.all.where("name like ?", "%#{search_for.titleize}%")
+    self.where("name like ?", "%#{search_for.titleize}%")
     else
       self.all
     end

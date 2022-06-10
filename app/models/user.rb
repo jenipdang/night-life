@@ -12,10 +12,6 @@ class User < ApplicationRecord
   validates :username, presence: true, length: {in: 6..25}
   validates :password, length: {in: 8..25}
 
-  def post_events
-    self.created_events.order(created_at: 'desc')
-  end
-
   def sort_event
     self.created_events.order(name: 'asc')
   end
@@ -23,10 +19,6 @@ class User < ApplicationRecord
   def sort_venue
     self.created_venues.order(name: 'asc')
   end
-
-  # def sort_by_asc
-  #   self.created_events.sort_by{|event| event.name} 
-  # end
 
   def total_commented_events
     self.commented_events.uniq.length

@@ -4,6 +4,7 @@
     flex-wrap: wrap;
 }
 
+
 .event-card {
     display: inline;
     border: 1px solid #eee;
@@ -27,4 +28,3 @@
 .event-card:hover {
     transform: scale(1.05)
 }
-

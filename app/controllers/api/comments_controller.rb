@@ -2,32 +2,31 @@ class Api::CommentsController < ApplicationController
     skip_before_action :authorize, only: [:index, :show]
     before_action :find_comment, only: [:show, :update, :destroy]
 
-    #GET "/comments" or GET "events/:event_id/comments"
     def index 
         if params[:event_id]
             event = Event.find(params[:event_id])
             render json: event.comments
-        else #GET "/comments"
+        else 
             render json: Comment.all
         end
     end
 
-    def show #get "/comments/:id"
+    def show 
         render json: @comment
     end
 
-    def create #post "/comments" #post "events/:event_id/comments"
+    def create 
         event = Event.find(params[:event_id])
         comment = @current_user.comments.create!(event: event, content: params[:content])
         render json: comment, status: :created
     end
 
-    def update #patch "/comment/:id"
+    def update 
             @comment&.update!(comment_params)
             render json: @comment
     end
 
-    def destroy #delete "/comment/:id"
+    def destroy 
         if @comment&.destroy
             render json: {message: "Successfully destroyed comment!"}
         else
